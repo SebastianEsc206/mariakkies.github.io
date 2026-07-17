@@ -12,3 +12,4 @@ convertir los links de la imagenes a links que se puedan buscar localmente
 
 arreglar la parte de la promociones 
 ubicar las promociones en el catalogo
+arregla errores ortograficos
