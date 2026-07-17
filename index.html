@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merakiies - Galletas Artesanales</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="logo">Merakiies</div>
+        <nav>
+          <ul class="nav-links">
+            <li>
+              <button class="nav-btn active" data-target="home">Inicio</button>
+            </li>
+            <li>
+              <button class="nav-btn" data-target="catalog">Catalogo</button>
+            </li>
+            <li>
+              <button class="nav-btn" data-target="search">Busqueda</button>
+            </li>
+            <li>
+              <button class="nav-btn" data-target="nosotros">Nosotros</button>
+            </li>
+            <li>
+              <button class="nav-btn" data-target="cart">
+                Carrito <span id="cart-badge" class="badge">0</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+        <button class="btn-primary nav-btn" data-target="catalog">
+          Ver catalogo
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="view active">
+        <section class="hero">
+          <div class="hero-content">
+            <h1>Galletas artesanales, recien horneadas</h1>
+            <p>
+              Elaboradas cada manana con ingredientes seleccionados para
+              ofrecerte momentos de pura felicidad en cada bocado.
+            </p>
+            <button class="btn-primary nav-btn" data-target="catalog">
+              Comprar ahora
+            </button>
+          </div>
+          <div class="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80"
+              alt="Galletas recien horneadas"
+            />
+          </div>
+        </section>
+
+        <section class="carousel-section">
+          <h2>Nuestras Especialidades</h2>
+          <div class="carousel-container">
+            <button id="carousel-prev" class="carousel-control">Ant</button>
+            <div class="carousel-track-wrapper">
+              <div id="carousel-track" class="carousel-track">
+                <!-- Las imagenes del carrusel se inyectan via JS -->
+              </div>
+            </div>
+            <button id="carousel-next" class="carousel-control">Sig</button>
+          </div>
+        </section>
+
+        <section class="promos">
+          <div class="promo-card">
+            <h3>3x2 en Avena y Pasas</h3>
+            <p>
+              Lleva tres y paga solo dos en todas nuestras galletas de avena
+              esta semana.
+            </p>
+            <button class="btn-secondary nav-btn" data-target="catalog">
+              Aprovechar promo
+            </button>
+          </div>
+          <div class="promo-card">
+            <h3>Descuento de Temporada</h3>
+            <p>
+              Obten un 15% de descuento en la coleccion de galletas veganas.
+            </p>
+            <button class="btn-secondary nav-btn" data-target="catalog">
+              Ver veganas
+            </button>
+          </div>
+        </section>
+      </section>
+      <section id="catalog" class="view">
+        <div class="catalog-header">
+          <h2>Catalogo de galletas</h2>
+          <p>
+            Nuestra seleccion exclusiva. Solo utilizamos mantequilla real,
+            chocolates premium y cero conservantes artificiales.
+          </p>
+        </div>
+
+        <div class="filters-bar">
+          <div class="filter-group">
+            <label for="category-filter">Categoria:</label>
+            <select id="category-filter">
+              <option value="all">Todas</option>
+              <option value="Chocolate">Chocolate</option>
+              <option value="Avena">Avena</option>
+              <option value="Veganas">Veganas</option>
+              <option value="Sin Gluten">Sin Gluten</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="price-sort">Ordenar por:</label>
+            <select id="price-sort">
+              <option value="default">Relevancia</option>
+              <option value="asc">Menor a mayor precio</option>
+              <option value="desc">Mayor a menor precio</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="catalog-grid" class="products-grid"></div>
+      </section>
+
+      <section id="cart" class="view">
+        <div class="cart-header">
+          <h2>Tu carrito de compras</h2>
+        </div>
+
+        <div id="empty-cart-message" class="empty-cart">
+          <p>
+            Tu carrito esta actualmente vacio. Visita nuestro catalogo para
+            agregar deliciosas galletas.
+          </p>
+          <button class="btn-primary nav-btn" data-target="catalog">
+            Ir al catalogo
+          </button>
+        </div>
+
+        <div id="cart-content" class="cart-layout hidden">
+          <div class="cart-items" id="cart-items-container"></div>
+
+          <div class="cart-summary">
+            <h3>Resumen de Compra</h3>
+            <div class="summary-line">
+              <span>Subtotal:</span>
+              <span id="summary-subtotal">$0.00</span>
+            </div>
+            <div class="summary-line">
+              <span>Impuestos (10%):</span>
+              <span id="summary-tax">$0.00</span>
+            </div>
+            <div class="summary-total">
+              <span>Total:</span>
+              <span id="summary-total">$0.00</span>
+            </div>
+
+            <div class="cart-actions">
+              <button id="btn-checkout" class="btn-primary w-100">
+                Proceder al pago
+              </button>
+              <button class="btn-secondary w-100 nav-btn" data-target="catalog">
+                Seguir comprando
+              </button>
+              <button id="btn-clear-cart" class="btn-text w-100">
+                Vaciar carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="search" class="view">
+        <div class="search-header">
+          <h2>Buscar Galletas</h2>
+          <div class="search-bar">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar galletas por nombre o ingrediente..."
+            />
+            <button id="btn-search" class="btn-primary">Buscar</button>
+          </div>
+        </div>
+
+        <div class="search-results-info">
+          <p id="search-status-text">
+            Ingresa un termino para comenzar la busqueda.
+          </p>
+        </div>
+
+        <div id="search-grid" class="products-grid"></div>
+      </section>
+
+      <section id="nosotros" class="view">
+        <div class="about-header">
+          <h2>Sobre Merakiies</h2>
+          <p>
+            Conoce más sobre nuestra historia, nuestra pasión por la repostería
+            y cómo contactarnos.
+          </p>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Lo que hacemos</h3>
+            <p>
+              En Merakiies, nos dedicamos a hornear momentos de felicidad. Cada
+              una de nuestras galletas es elaborada de forma 100% artesanal,
+              utilizando recetas tradicionales e ingredientes de la más alta
+              calidad.
+            </p>
+            <p>
+              Creemos en el valor de lo auténtico: utilizamos mantequilla real,
+              chocolates premium y cero conservantes artificiales para ofrecerte
+              un sabor real que reconforta el alma en cada bocado.
+            </p>
+          </div>
+          <div class="about-contact">
+            <h3>Contacto</h3>
+            <p>
+              ¿Tienes alguna duda, quieres hacer un pedido especial para un
+              evento o simplemente quieres saludarnos? ¡Estamos aquí para ti!
+            </p>
+            <ul>
+              <li>
+                <strong>📍 Dirección:</strong> Maracaibo, Zulia, Venezuela
+              </li>
+              <li><strong>📞 Teléfono:</strong> +58 414-0000000</li>
+              <li><strong>✉️ Correo:</strong> merakiies@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h4>Merakiies</h4>
+          <p>Hecho con amor y dedicacion.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Enlaces</h4>
+          <ul>
+            <li><a href="#" class="nav-btn" data-target="home">Inicio</a></li>
+            <li>
+              <a href="#" class="nav-btn" data-target="catalog">Catálogo</a>
+            </li>
+            <!-- Nuevo enlace a Nosotros en el footer -->
+            <li>
+              <a href="#" class="nav-btn" data-target="nosotros">Nosotros</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Siguenos</h4>
+          <ul>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Merakiies. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
