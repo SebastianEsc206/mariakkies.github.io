@@ -1,22 +1,61 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 app.use(cors()); 
 app.use(express.json()); 
+
+// Servir archivos estáticos del frontend (HTML, CSS, JS)
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // DB
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',           
     password: '',           
-    database: 'merakiies_db' 
+    // database: 'merakiies_db', 
+    multipleStatements: true 
+
 });
 
 db.connect(err => {
     if (err) throw err;
-    console.log('Conectado exitosamente a la base de datos MySQL');
+    console.log('Conectado a MySQL localmente');
+    
+    // 1. Crear la base de datos si no existe
+    db.query("CREATE DATABASE IF NOT EXISTS merakiies_db;", (err) => {
+        if (err) throw err;
+        
+        // 2. Seleccionar la base de datos para las futuras consultas
+        db.query("USE merakiies_db;", (err) => {
+            if (err) throw err;
+            
+            // 3. Comprobar si existen las tablas (revisando si existe 'products')
+            db.query("SHOW TABLES LIKE 'products';", (err, results) => {
+                if (err) throw err;
+                
+                if (results.length === 0) {
+                    console.log('Tablas no encontradas. Autoconfigurando la base de datos...');
+                    // Leer el archivo SQL e inyectarlo
+                    const sqlFile = path.join(__dirname, '..', 'database', 'merakiies_db.sql');
+                    const sqlQueries = fs.readFileSync(sqlFile, 'utf8');
+                    
+                    db.query(sqlQueries, (err) => {
+                        if (err) {
+                            console.error('Error al importar la base de datos:', err);
+                            throw err;
+                        }
+                        console.log('¡Base de datos y tablas creadas exitosamente de forma automática!');
+                    });
+                } else {
+                    console.log('Base de datos conectada y lista para usarse.');
+                }
+            });
+        });
+    });
 });
 
 app.get('/api/products', (req, res) => {
@@ -94,6 +133,6 @@ app.delete('/api/cart/:session_id', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('Servidor Backend corriendo en http://localhost:3000');
+app.listen(4000, () => {
+    console.log('Servidor Backend corriendo en http://localhost:4000');
 });

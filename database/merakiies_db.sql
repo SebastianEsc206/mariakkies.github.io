@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cart_items`
+-- Estructura de tabla para la tabla `cart`
 --
 
-CREATE TABLE `cart_items` (
+CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `session_id` varchar(100) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -87,9 +87,9 @@ INSERT INTO `products` (`id`, `name`, `category_id`, `description`, `price`, `im
 --
 
 --
--- Indices de la tabla `cart_items`
+-- Indices de la tabla `cart`
 --
-ALTER TABLE `cart_items`
+ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
 
@@ -111,9 +111,9 @@ ALTER TABLE `products`
 --
 
 --
--- AUTO_INCREMENT de la tabla `cart_items`
+-- AUTO_INCREMENT de la tabla `cart`
 --
-ALTER TABLE `cart_items`
+ALTER TABLE `cart`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -133,10 +133,10 @@ ALTER TABLE `products`
 --
 
 --
--- Filtros para la tabla `cart_items`
+-- Filtros para la tabla `cart`
 --
-ALTER TABLE `cart_items`
-  ADD CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
 -- Filtros para la tabla `products`

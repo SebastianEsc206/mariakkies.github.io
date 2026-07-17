@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api'; // Mantenemos la API solo para el catálogo de productos
+const API_URL = '/api'; // Mantenemos la API solo para el catálogo de productos
 
 let dbProducts = [];
 let cart = JSON.parse(localStorage.getItem('merakiies_cart')) || []; 
