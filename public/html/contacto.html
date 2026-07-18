@@ -1,0 +1,415 @@
+<!doctype html>
+
+<html class="scroll-smooth" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Contacto | Crumbs &amp; Co. Artisanal Bakery</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="/js/tailwind-theme.js"></script>
+    <script src="/js/components.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      .cookie-shadow {
+        box-shadow: 0 20px 40px rgba(62, 39, 35, 0.08);
+      }
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+      }
+      .accordion-item.active .accordion-content {
+        max-height: 200px;
+      }
+      .accordion-item.active .chevron {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface font-body-md overflow-x-hidden">
+    <!-- TopNavBar -->
+    <div id="header-container"></div>
+    <main>
+      <!-- Hero Section -->
+      <section style="padding-top: 8rem"
+        class="bg-surface py-stack-lg px-margin-mobile md:px-margin-desktop text-center"
+      >
+        <div class="max-w-3xl mx-auto space-y-stack-sm">
+          <h1
+            class="font-headline-xl text-headline-xl text-primary leading-tight"
+          >
+            ¡Estamos listos para escucharte!
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto"
+          >
+            Ya sea para un pedido especial, el diseño del pastel de tus sueños o
+            simplemente para saludarnos, nuestra cocina artesanal está abierta
+            para ti.
+          </p>
+        </div>
+      </section>
+      <!-- Contact Form & Intro -->
+      <section
+        class="bg-surface-container-low py-stack-lg px-margin-mobile md:px-margin-desktop"
+      >
+        <div
+          class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center"
+        >
+          <div class="space-y-stack-md">
+            <div
+              class="w-full aspect-video rounded-full overflow-hidden bg-cover bg-center cookie-shadow"
+              data-alt="A macro photograph of warm, freshly baked artisanal cookies with melting chocolate chips, resting on a textured linen cloth. The lighting is soft and golden, suggesting a cozy bakery atmosphere in the early morning. The background features blurred wooden kitchen utensils and a light dusting of flour on a cream-colored surface. The overall color palette is dominated by rich browns, creams, and terracotta tones."
+              style="
+                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuD8ZiByFCqsbUuh-YRvqOtSpTclu8jiX0SpAhA0fWlpBM29_oQT67CIN03KpFlx9VQ5rzxcAY3lL4DTc-nGYKdtmC-82OEoeLXnU3pjSfIAQzsvYF85TO_ZH8SpmpwpxDo-ZFRsjek7Xy0yeUjhIKx3QOFqQ5io-yhdui4QIj3jtv5UvuIsDtezXE1kN54ufoOXau15qkX24OTqPiz6YKRYOdUCOQ6couPko_CxEG5654oXojbt0Nv1NlG_T0_bC3btBwXfALCdYiH_&quot;);
+              "
+            ></div>
+            <div class="space-y-4">
+              <h2 class="font-headline-lg text-headline-lg text-secondary">
+                Horneamos tus ideas
+              </h2>
+              <p class="text-on-surface-variant font-body-md">
+                Cada bocado en Crumbs &amp; Co. cuenta una historia. Completa el
+                formulario y déjanos ser parte de la tuya.
+              </p>
+              <div class="flex items-center gap-4 text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary"
+                  >location_on</span
+                >
+                <span class="font-label-md text-label-md"
+                  >Calle de la Harina 123, Barrio Pastel, Ciudad Pastel</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-surface-container-lowest p-8 md:p-12 rounded-[40px] cookie-shadow"
+          >
+            <form class="space-y-stack-sm">
+              <div class="space-y-2">
+                <label
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >Nombre Completo</label
+                >
+                <input
+                  class="w-full bg-surface-container border-2 border-transparent focus:border-primary/20 focus:ring-0 rounded-full px-6 py-4 transition-all"
+                  placeholder="Escribe tu nombre"
+                  type="text"
+                />
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-2">
+                  <label
+                    class="font-label-md text-label-md text-on-surface-variant"
+                    >Correo Electrónico</label
+                  >
+                  <input
+                    class="w-full bg-surface-container border-2 border-transparent focus:border-primary/20 focus:ring-0 rounded-full px-6 py-4 transition-all"
+                    placeholder="tu@email.com"
+                    type="email"
+                  />
+                </div>
+                <div class="space-y-2">
+                  <label
+                    class="font-label-md text-label-md text-on-surface-variant"
+                    >Teléfono / WhatsApp</label
+                  >
+                  <input
+                    class="w-full bg-surface-container border-2 border-transparent focus:border-primary/20 focus:ring-0 rounded-full px-6 py-4 transition-all"
+                    placeholder="+57 300 000 0000"
+                    type="tel"
+                  />
+                </div>
+              </div>
+              <div class="space-y-2">
+                <label
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  >Tu Mensaje</label
+                >
+                <textarea
+                  class="w-full bg-surface-container border-2 border-transparent focus:border-primary/20 focus:ring-0 rounded-[24px] px-6 py-4 transition-all resize-none"
+                  placeholder="Cuéntanos, ¿en qué bocado de felicidad estás pensando hoy?"
+                  rows="4"
+                ></textarea>
+              </div>
+              <button
+                class="w-full bg-primary-container text-white font-label-md text-label-md py-4 rounded-full hover:scale-[1.02] active:scale-95 transition-all shadow-lg hover:shadow-xl mt-4"
+                type="submit"
+              >
+                Enviar Mensaje
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- WhatsApp Banner -->
+      <a
+        class="block bg-secondary-container hover:bg-secondary-fixed-dim transition-colors py-8 px-margin-mobile text-center"
+        href="#"
+      >
+        <div
+          class="flex flex-col md:flex-row items-center justify-center gap-4 max-w-container-max mx-auto"
+        >
+          <div
+            class="bg-white p-3 rounded-full flex items-center justify-center"
+          >
+            <span
+              class="material-symbols-outlined text-[#25D366] text-3xl"
+              style="font-variation-settings: &quot;FILL&quot; 1"
+              >chat</span
+            >
+          </div>
+          <p
+            class="font-headline-md text-headline-md text-on-secondary-container"
+          >
+            ¿Buscas una respuesta inmediata?
+            <span class="font-bold underline decoration-primary/30"
+              >Haz clic aquí para chatear directamente con nuestra cocina.</span
+            >
+          </p>
+        </div>
+      </a>
+      <!-- Delivery & Logistics -->
+      <section
+        class="bg-surface py-stack-lg px-margin-mobile md:px-margin-desktop"
+      >
+        <div class="max-w-container-max mx-auto">
+          <div class="text-center mb-stack-md">
+            <h2 class="font-headline-lg text-headline-lg text-primary">
+              Logística &amp; Dulzura
+            </h2>
+            <p class="font-body-md text-on-surface-variant">
+              Cuidamos cada detalle desde el horno hasta tu puerta.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Dispatch Hours -->
+            <div
+              class="p-8 bg-surface-container rounded-[32px] text-center space-y-4 hover:bg-surface-container-high transition-colors"
+            >
+              <span class="material-symbols-outlined text-tertiary text-4xl"
+                >schedule</span
+              >
+              <h3 class="font-headline-md text-headline-md">
+                Horarios de Despacho
+              </h3>
+              <p class="font-body-md text-on-surface-variant">
+                Lunes a Sábado: 8:00 AM - 6:00 PM<br />Domingos: 9:00 AM - 1:00
+                PM
+              </p>
+            </div>
+            <!-- Coverage -->
+            <div
+              class="p-8 bg-surface-container rounded-[32px] text-center space-y-4 hover:bg-surface-container-high transition-colors"
+            >
+              <span class="material-symbols-outlined text-tertiary text-4xl"
+                >distance</span
+              >
+              <h3 class="font-headline-md text-headline-md">
+                Zonas de Cobertura
+              </h3>
+              <p class="font-body-md text-on-surface-variant">
+                Entregamos en toda la zona metropolitana y alrededores con
+                tarifas preferenciales.
+              </p>
+            </div>
+            <!-- Delivery Seguro -->
+            <div
+              class="p-8 bg-surface-container rounded-[32px] text-center space-y-4 hover:bg-surface-container-high transition-colors border-2 border-primary/10"
+            >
+              <span class="material-symbols-outlined text-primary text-4xl"
+                >verified</span
+              >
+              <h3 class="font-headline-md text-headline-md text-primary">
+                Delivery Seguro
+              </h3>
+              <p class="font-body-md text-on-surface-variant">
+                Garantizamos que tu pedido llegue intacto y fresco, utilizando
+                empaques térmicos especializados.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- FAQ Accordion -->
+      <section
+        class="bg-surface-container-low py-stack-lg px-margin-mobile md:px-margin-desktop"
+      >
+        <div class="max-w-3xl mx-auto">
+          <h2
+            class="font-headline-xl text-headline-xl text-center text-primary mb-stack-md"
+          >
+            Preguntas Frecuentes
+          </h2>
+          <div class="space-y-4">
+            <!-- Item 1 -->
+            <div
+              class="accordion-item bg-surface-container-lowest rounded-[24px] overflow-hidden cookie-shadow"
+            >
+              <button
+                class="w-full px-8 py-6 flex justify-between items-center text-left"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="font-label-md text-label-md text-secondary"
+                  >¿Con cuánto tiempo debo pedir un pastel personalizado?</span
+                >
+                <span
+                  class="material-symbols-outlined text-primary transition-transform duration-300 chevron"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <div class="px-8 pb-6 font-body-md text-on-surface-variant">
+                  Recomendamos realizar tu pedido con al menos 5 días de
+                  anticipación para garantizar disponibilidad y diseño perfecto.
+                  Para eventos grandes, 2 semanas es lo ideal.
+                </div>
+              </div>
+            </div>
+            <!-- Item 2 -->
+            <div
+              class="accordion-item bg-surface-container-lowest rounded-[24px] overflow-hidden cookie-shadow"
+            >
+              <button
+                class="w-full px-8 py-6 flex justify-between items-center text-left"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="font-label-md text-label-md text-secondary"
+                  >¿Cómo es el empaque premium?</span
+                >
+                <span
+                  class="material-symbols-outlined text-primary transition-transform duration-300 chevron"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <div class="px-8 pb-6 font-body-md text-on-surface-variant">
+                  Utilizamos cajas de cartón de alta densidad con acabados en
+                  foil dorado y bases reforzadas, diseñadas para mantener la
+                  temperatura y estructura de tus postres.
+                </div>
+              </div>
+            </div>
+            <!-- Item 3 -->
+            <div
+              class="accordion-item bg-surface-container-lowest rounded-[24px] overflow-hidden cookie-shadow"
+            >
+              <button
+                class="w-full px-8 py-6 flex justify-between items-center text-left"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="font-label-md text-label-md text-secondary"
+                  >¿Cuáles son los métodos de pago?</span
+                >
+                <span
+                  class="material-symbols-outlined text-primary transition-transform duration-300 chevron"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <div class="px-8 pb-6 font-body-md text-on-surface-variant">
+                  Aceptamos transferencias bancarias, tarjetas de
+                  crédito/débito, y pagos mediante plataformas digitales
+                  seguras. El 50% de anticipo es necesario para pedidos
+                  especiales.
+                </div>
+              </div>
+            </div>
+            <!-- Item 4 -->
+            <div
+              class="accordion-item bg-surface-container-lowest rounded-[24px] overflow-hidden cookie-shadow"
+            >
+              <button
+                class="w-full px-8 py-6 flex justify-between items-center text-left"
+                onclick="toggleAccordion(this)"
+              >
+                <span class="font-label-md text-label-md text-secondary"
+                  >¿Tienen opciones para restricciones dietéticas?</span
+                >
+                <span
+                  class="material-symbols-outlined text-primary transition-transform duration-300 chevron"
+                  >expand_more</span
+                >
+              </button>
+              <div class="accordion-content">
+                <div class="px-8 pb-6 font-body-md text-on-surface-variant">
+                  ¡Sí! Contamos con una línea de productos sin gluten, sin
+                  azúcar añadida y opciones veganas. Consulta nuestro menú
+                  específico en la sección de "Shop".
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container dark:bg-surface-container-highest w-full rounded-t-xl mt-stack-lg"
+    >
+      <div
+        class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md w-full max-w-container-max mx-auto"
+      >
+        <div class="space-y-4 text-center md:text-left mb-8 md:mb-0">
+          <div
+            class="font-headline-md text-headline-md text-on-secondary-container dark:text-secondary-fixed"
+          >
+            Crumbs &amp; Co.
+          </div>
+          <p
+            class="font-body-md text-body-md text-secondary dark:text-secondary-fixed opacity-90"
+          >
+            © 2024 Crumbs &amp; Co. Artisanal Bakery. Handcrafted with Love.
+          </p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6">
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+            href="#"
+            >Privacy Policy</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+            href="#"
+            >Terms of Service</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+            href="#"
+            >Shipping Info</a
+          >
+          <a
+            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
+            href="#"
+            >Wholesale</a
+          >
+        </div>
+      </div>
+    </footer>
+    <script>
+      function toggleAccordion(button) {
+        const item = button.parentElement;
+        const isActive = item.classList.contains("active");
+
+        // Close all items
+        document.querySelectorAll(".accordion-item").forEach((el) => {
+          el.classList.remove("active");
+        });
+
+        // Open clicked item if it wasn't already open
+        if (!isActive) {
+          item.classList.add("active");
+        }
+      }
+    </script>
+  </body>
+</html>

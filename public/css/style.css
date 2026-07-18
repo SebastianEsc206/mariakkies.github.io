@@ -63,7 +63,7 @@ button {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.hidden {
+.app-hidden {
     display: none !important;
 }
 
@@ -138,10 +138,13 @@ header {
 }
 
 main {
+    min-height: 60vh;
+}
+
+main > section.view:not(#home) {
     max-width: 1200px;
     margin: 40px auto;
     padding: 0 24px;
-    min-height: 60vh;
 }
 
 /* HOME: Hero */

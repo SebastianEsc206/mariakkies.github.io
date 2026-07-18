@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merakiies - Menú de Felicidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="../js/tailwind-theme.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Custom classes used by the menu design */
+      .product-card-shadow {
+        box-shadow: 0 4px 24px rgba(74, 59, 50, 0.08);
+      }
+      .product-card-shadow:hover {
+        box-shadow: 0 12px 40px rgba(74, 59, 50, 0.14);
+        transform: translateY(-4px);
+      }
+      .hover-reveal img:first-child {
+        opacity: 1;
+        transition: opacity 0.5s ease;
+      }
+      .hover-reveal img:last-child {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      .hover-reveal:hover img:first-child {
+        opacity: 0;
+      }
+      .hover-reveal:hover img:last-child {
+        opacity: 1;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #ddc0ba;
+        border-radius: 9999px;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-body-md overflow-x-hidden">
+    <!-- TopNavBar will be injected here -->
+    <div id="header-container"></div>
+    <main>
+      <!-- 1. Hero Header -->
+      <section style="padding-top: 6rem"
+        class="bg-secondary-fixed/30 py-stack-lg px-margin-mobile md:px-margin-desktop text-center"
+      >
+        <div class="max-w-4xl mx-auto">
+          <nav
+            class="flex justify-center items-center gap-2 mb-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+          >
+            <a href="../index.html" class="hover:text-primary">Inicio</a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <span class="text-primary font-bold">Menú</span>
+          </nav>
+          <h1 class="font-headline-xl text-headline-xl text-on-background mb-4">
+            Nuestro Menú de Felicidad
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto"
+          >
+            Cada galleta es una historia de amor horneada lentamente, con
+            centros derretidos y bordes crujientes que te harán sonreír con cada
+            bocado.
+          </p>
+        </div>
+      </section>
+      <!-- 2 & 3. Toolbar & Filter System -->
+      <section
+        class="sticky top-16 bg-surface-bright/95 backdrop-blur-sm z-40 border-b border-outline-variant/30 py-4 px-margin-mobile md:px-margin-desktop"
+      >
+        <div class="max-w-container-max mx-auto space-y-6">
+          <!-- Toolbar -->
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
+            <div class="relative flex-1 max-w-md flex">
+              <span
+                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline"
+                >search</span
+              >
+              <input
+                type="text"
+                placeholder="Busca tu sabor favorito..."
+                class="w-full pl-12 pr-4 py-3 bg-surface-container-low border-2 border-outline-variant/20 rounded-full focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md"
+              /><button
+                class="ml-2 px-6 py-3 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-sm"
+              >
+                Buscar
+              </button>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="font-label-md text-label-md text-on-surface-variant"
+                >Ordenar por:</span
+              >
+              <select
+                class="bg-surface-container-low border-2 border-outline-variant/20 rounded-full px-4 py-2 font-label-md text-label-md focus:ring-2 focus:ring-primary outline-none"
+              >
+                <option>Más vendidos</option>
+                <option>Precio: Menor a Mayor</option>
+                <option>Nuevos ingresos</option>
+              </select>
+            </div>
+          </div>
+          <!-- Filters -->
+          <div
+            class="flex items-center gap-3 overflow-x-auto custom-scrollbar pb-2 no-scrollbar"
+          >
+            <button
+              class="whitespace-nowrap px-6 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md shadow-md transition-all active:scale-95"
+            >
+              Todo el Menú
+            </button>
+            <button
+              class="whitespace-nowrap px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md hover:bg-secondary-fixed transition-all"
+            >
+              Galletas Clásicas
+            </button>
+            <button
+              class="whitespace-nowrap px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md hover:bg-secondary-fixed transition-all"
+            >
+              Línea Premium &amp; Rellenas
+            </button>
+            <button
+              class="whitespace-nowrap px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md hover:bg-secondary-fixed transition-all"
+            >
+              Combos Interactivos
+            </button>
+            <button
+              class="whitespace-nowrap px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md hover:bg-secondary-fixed transition-all"
+            >
+              Cookie Cakes
+            </button>
+            <button
+              class="whitespace-nowrap px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md hover:bg-secondary-fixed transition-all"
+            >
+              Extras &amp; Dips
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- 4. Product Grid -->
+      <section
+        class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+          <!-- Card 1 -->
+          <div
+            class="group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative"
+          >
+            <div class="absolute top-4 left-4 z-10">
+              <span
+                class="bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm"
+                >Más Vendido</span
+              >
+            </div>
+            <div
+              class="relative w-full aspect-square mb-4 rounded-[1.5rem] overflow-hidden hover-reveal"
+            >
+              <img
+                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                alt="Classic Gold cookie"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS-Wy75dGHbTpIW77J4Kb1P2Nly7DOAV-8Lnl-3UTOHwUx9l6TbtemOsHMMda7eDk18YqLbzBBe95islSnALmExmF78FByH6esS1W_ly93yyMTd2E0YSrmYIrDZl0UjY7GO-t6436rGJ9m49o8BaBAbQwDhf7711IFuy0f0UBlHM-A4M2_LplOq-5KKkMn4OuQmuG6t14rUruZq89AO_paKDMOErrJ7NQa6PL4sbM983ERhQcrsLD_pDGDPPtEW4qY4WJYJs_Afh_k"
+              />
+              <img
+                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0"
+                alt="Classic Gold cookie inside"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaOrHfo2G32uKuufzuQL5xXf04S4U4Br-Z-EBQp7MpjaihrXF17Y5xxFQmmzZdG3Apb638Hmn10BITGxQvAK5jxBKDMJcrSXkHUrRzvMRGyW413TI7GYQTUFrKDPfr9lP7Rwuvz2PV9zNQ66-2e3nG5rit0wixodZ44aWKhe8QTeJGC0TRQ3HWMDqevw3nC2OG4GZIxA9tYhF4JrQ1tO2QbY7tC9IzGl4DYrMKIZrCANXHgJCyMCiGjyAeId-DtsDQ8s6cAMMnvqEy"
+              />
+            </div>
+            <div class="px-3 pb-4">
+              <h3
+                class="font-headline-md text-headline-md text-on-background mb-1"
+              >
+                Classic Gold
+              </h3>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2"
+              >
+                Masa secreta con chispas de chocolate belga y un toque de sal
+                marina.
+              </p>
+              <div class="flex items-center justify-between">
+                <span
+                  class="text-on-primary-fixed-variant font-bold text-headline-md"
+                  >$3.50</span
+                >
+                <div class="flex items-center gap-2">
+                  <input
+                    type="number"
+                    min="1"
+                    value="1"
+                    class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                  /><button
+                    class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform"
+                  >
+                    <span class="material-symbols-outlined">add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative"
+          >
+            <div class="absolute top-4 left-4 z-10">
+              <span
+                class="bg-tertiary-container text-on-tertiary-container font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm"
+                >Nuevo</span
+              >
+            </div>
+            <div
+              class="relative w-full aspect-square mb-4 rounded-[1.5rem] overflow-hidden hover-reveal"
+            >
+              <img
+                class="absolute inset-0 w-full h-full object-cover"
+                alt="Red Velvet Core cookie"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfUjFLgjqBHQ_fWAqkOUQmfrXolvkq7ro3DGsMfIHF_7-qA4sHaxNxYeufH8lEPFbNxYgaHMZpOwNHOLTmOn2jKTMKxVrRMccB5JlV6UKb5ExfSpPQJqvcaCaAa8T18NAiDu-RNm29zyXo5Qj_xZRC33Om7QZYgRXibHi6DjMNrw6LCPj-uhBafoxZCV9uv0TxffqtTCr2GXBt2JZY9wHvx4858Op06REAHYm0mLCD8Cq6q4k07_J-Tv-ZQXaJ08dc-YT8yDYDkaIV"
+              />
+              <img
+                class="absolute inset-0 w-full h-full object-cover opacity-0"
+                alt="Red Velvet Core cookie inside"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-keWyK0tZgr-BAZ2s-uFcNtTYBa-TOu_atJNJCpsUHiLyZXhDpgp2_NWLJ_UQV7qnVgqXLH-9sL-cVB-x_ihlfs5uqHXPcC_TXh-tUcdf_uwKGCoILM6YYXvoROU95ysCb4eqTg1DqokJmzJ-hcLoBASrFjMlH1gZDQGrkUNKTLwYL_qv3QlfVyL9-_KwSOjRDD0zsfkn2a1PMAFJoVqaTplwfw0asVvS1sROA-984L61lMQCeCe8mwtRNS67ZRIP0vdTt9CSN7bV"
+              />
+            </div>
+            <div class="px-3 pb-4">
+              <h3
+                class="font-headline-md text-headline-md text-on-background mb-1"
+              >
+                Red Velvet Core
+              </h3>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2"
+              >
+                Masa de cacao rojo intenso rellena de suave crema de queso
+                artesanal.
+              </p>
+              <div class="flex items-center justify-between">
+                <span
+                  class="text-on-primary-fixed-variant font-bold text-headline-md"
+                  >$4.20</span
+                >
+                <div class="flex items-center gap-2">
+                  <input
+                    type="number"
+                    min="1"
+                    value="1"
+                    class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                  /><button
+                    class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform"
+                  >
+                    <span class="material-symbols-outlined">add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative"
+          >
+            <div
+              class="relative w-full aspect-square mb-4 rounded-[1.5rem] overflow-hidden hover-reveal"
+            >
+              <img
+                class="absolute inset-0 w-full h-full object-cover"
+                alt="Giant Cookie Cake"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBw-lBCKqAZryVd7QDZhVtDo86cPJLxpUKe6vwjgtpmtVtgOB2aHifpXJ5TiQqVNflMrKskJObSK4-JwrEQER_CU4tQd4YiWEeM2lqWkGzgnuhg47JPfr4deRyQBkboFmhLEV54OYdIXVUoCqkA5BhcG_XCz2usl66ObCuxOfF-TFk4Nmt8B8lbSAZcO-5TjdhOvAX5LocyNnq4PyzuPao15IDxNLMUKvhUhaecZUysz4PGu9B3eMcdzidGJJb2VbjlKdAfo2pCMkL"
+              />
+              <img
+                class="absolute inset-0 w-full h-full object-cover opacity-0"
+                alt="Giant Cookie Cake inside"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq8YesCtb3AgCR2vxxiFtfz6lGWUk3nk9HCr1zzJ7-yF85FzWd8-j09onQJDw-NCufuZLyFc6cFYLrDzf9abuhiCHhqdhT_bnk2wK-XfcRXIDYlt2oijVcxlbmllzjDB6iyYKtLTaTSEfbctLKqeMHaVfREBaly-sr7ASVgLo7PS4NUmx-aEW3Ps1NCC_zDfTm06yxvf0MIQwSWcqRtQo8Iubjf-K6FG_ly9tVnLAQqNMM1tO6p7VaqZZu8zmxDofuSsxAkYXB198G"
+              />
+            </div>
+            <div class="px-3 pb-4">
+              <h3
+                class="font-headline-md text-headline-md text-on-background mb-1"
+              >
+                Giant Cookie Cake
+              </h3>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2"
+              >
+                Nuestra galleta de 20cm personalizada para tus momentos más
+                especiales.
+              </p>
+              <div class="flex items-center justify-between">
+                <span
+                  class="text-on-primary-fixed-variant font-bold text-headline-md"
+                  >$24.00</span
+                >
+                <div class="flex items-center gap-2">
+                  <button
+                    class="bg-secondary text-on-secondary font-label-md text-label-md px-4 py-2 rounded-full flex items-center gap-2 hover:opacity-90 transition-all active:scale-95"
+                  >
+                    <span class="material-symbols-outlined text-[20px]">edit</span>
+                    Personalizar
+                  </button>
+                  <div class="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      value="1"
+                      class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                    /><button
+                      class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform"
+                    >
+                      <span class="material-symbols-outlined">add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div
+            class="group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative"
+          >
+            <div class="absolute top-4 left-4 z-10">
+              <span
+                class="bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm"
+                >Premium</span
+              >
+            </div>
+            <div
+              class="relative w-full aspect-square mb-4 rounded-[1.5rem] overflow-hidden hover-reveal"
+            >
+              <img
+                class="absolute inset-0 w-full h-full object-cover"
+                alt="Dark Lava Lux cookie"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNxbFlXTRHzt0EchuVCgQpfGjML1C07q2Hce-tPwZHdJQxxfqOWcdMfJ5jf4er-JkEazibAwIlIL3Nz_K7hmkuI770agFqiKSz6m4I9ZV-RhrDj6BWNpqzmMo_RNPliIEtSmwPYB3vGehwYd6Xglck49E2YuPDKXzZP00hsLfRSaw21boC2QRUbbUfHfawZ6GtBotrvtc7GVv2K7SIZQyIsKQYgAYefIHSbfEgfqha8P07KG4StDH0r3EypSQoI8p3f7bEi385zCsl"
+              />
+              <img
+                class="absolute inset-0 w-full h-full object-cover opacity-0"
+                alt="Dark Lava Lux cookie inside"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhq0GApj0qn9zvmA8up_fS0mZ_EcV2Z1w9tRDTYdNuDBZqbPu7pJ7aLUtC_k9Nb_m9ILXV41DnAbWeDHOZ1rRHYg5RM_JGWsBeqi3a6j5FWWayr4VA_QdpbDcgU-b5xQwRTUh8KVy8qbgsMOegnximUqJvEBM79wqXXbAwPklLl3ek67_2kJ6Jc38U-4W5pHRtyS0WgnW3fUragUg6lPiP6Ns8Kj_jHPbv_Mw3L7TIvlJLTESJ-MdD3_acAgbIr4BLCwzK_nQAGU_W"
+              />
+            </div>
+            <div class="px-3 pb-4">
+              <h3
+                class="font-headline-md text-headline-md text-on-background mb-1"
+              >
+                Dark Lava Lux
+              </h3>
+              <p
+                class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2"
+              >
+                70% Cacao orgánico con corazón de fudge caliente y nueces
+                tostadas.
+              </p>
+              <div class="flex items-center justify-between">
+                <span
+                  class="text-on-primary-fixed-variant font-bold text-headline-md"
+                  >$4.50</span
+                >
+                <div class="flex items-center gap-2">
+                  <input
+                    type="number"
+                    min="1"
+                    value="1"
+                    class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                  /><button
+                    class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform"
+                  >
+                    <span class="material-symbols-outlined">add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 5. Cross-selling: Horizontal Carousel -->
+      <section
+        class="bg-surface-container-low py-stack-lg px-margin-mobile md:px-margin-desktop overflow-hidden"
+      >
+        <div class="max-w-container-max mx-auto">
+          <h2 class="font-headline-lg text-headline-lg text-on-background mb-8">
+            Completa tu Bocado
+          </h2>
+          <div
+            class="flex gap-gutter overflow-x-auto custom-scrollbar pb-6 snap-x"
+          >
+            <!-- Dip 1 -->
+            <div
+              class="snap-start flex-none w-64 group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative flex flex-col h-[420px]"
+            >
+              <div
+                class="relative w-full h-40 mb-4 rounded-[1.5rem] overflow-hidden"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  alt="Caramelo Salado dip"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU9KliBIMgUE3hu-g01749pPaoEH_VfE09m8YBmWFL226wO136RGdHXJCmxGEeGEn2_tTeOZorVsDJAh6_s4E2PeHF3HAYYX_tQSEk9ZVBV25viyjMb-lZ-6aiql3y1HkzPUVRa9geJvhMhowlfseAM_Vy8zvbrtEkyx-y72Y0H3OiugRNJ7LbKoUdJILlabkCtzu96uBk1WsiUGwQIMMW42dxp4MFaEvjMNkYhCx0qJNPH6zMXg8jQxjNcQUlBEqDLAzINC9WZR4D"
+                />
+              </div>
+              <div class="px-3 pb-4 flex flex-col flex-1">
+                <h4
+                  class="font-headline-md text-headline-md text-on-background mb-1"
+                >
+                  Caramelo Salado
+                </h4>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4"
+                >
+                  Delicioso caramelo artesanal con un toque sutil de sal marina.
+                </p>
+                <div class="flex items-center justify-between mt-auto">
+                  <span
+                    class="text-on-primary-fixed-variant font-bold text-headline-md"
+                    >$1.50</span
+                  >
+                  <div class="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      value="1"
+                      class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                    /><button
+                      class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform"
+                    >
+                      <span class="material-symbols-outlined">add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Dip 2 -->
+            <div
+              class="snap-start flex-none w-64 group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative flex flex-col h-[420px]"
+            >
+              <div
+                class="relative w-full h-40 mb-4 rounded-[1.5rem] overflow-hidden"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  alt="Leche Fría de Granja"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvs84HL3dbaRn_KYhFaU5-qMEqbiZQvadctsL8vfOehd1R2PrYt7bdIFOl7x323twxr8dnTj8nYyiI8HJjs4yjuEUo4l962GugBdsm3hCKqcuJ4gDV02TSZ2kPvBz34qch3QXE-2baCtM3etK6MKCwNR00mhnG4yjvV6YDQ0ze5Md0fA917ki_BdSRUc4FThTu-6xQ6xoJ4gOi5qth2ZSoTFNVy6yXu-_ohhCw8BU7AQ2Rev7TUxfq3A1zApRKLeEh2hgT2PpPXW3R"
+                />
+              </div>
+              <div class="px-3 pb-4 flex flex-col flex-1">
+                <h4
+                  class="font-headline-md text-headline-md text-on-background mb-1"
+                >
+                  Leche Fría de Granja
+                </h4>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4"
+                >
+                  Leche fresca y cremosa de granja local, el acompañante
+                  perfecto.
+                </p>
+                <div class="flex items-center justify-between mt-auto">
+                  <span
+                    class="text-on-primary-fixed-variant font-bold text-headline-md"
+                    >$2.00</span
+                  >
+                  <div class="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      value="1"
+                      class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                    /><button
+                      class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform"
+                    >
+                      <span class="material-symbols-outlined">add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Dip 3 -->
+            <div
+              class="snap-start flex-none w-64 group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative flex flex-col h-[420px]"
+            >
+              <div
+                class="relative w-full h-40 mb-4 rounded-[1.5rem] overflow-hidden"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  alt="Ganache de Vainilla"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA--bmMI_3xCcUCqMyyxyM6zJK30VFj0icuzKxHv-gjcuqMpFSviPxDqF-8ww_sSR_hWMCalJud4apXUAS1wCvdcvxWMc1IdzVJ0A0NePaXluHaNMtrpxbtuG9A4dHRkO1CtR8pQtUCP5uZHVmHd-AOs5AGnURhkrGvsPsY4tBCVrBdQ3vD0MhUrQz0mNfxQNzPfsJBaQKYgCNDA3dp7hH26_IyzAYVrRwy8q3HR_2_sKdRc6lt94s2Q33o-4fg1aAWEQJZprWnLGj3"
+                />
+              </div>
+              <div class="px-3 pb-4 flex flex-col flex-1">
+                <h4
+                  class="font-headline-md text-headline-md text-on-background mb-1"
+                >
+                  Ganache de Vainilla
+                </h4>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4"
+                >
+                  Suave crema de vainilla premium con textura aterciopelada.
+                </p>
+                <div class="flex items-center justify-between mt-auto">
+                  <span
+                    class="text-on-primary-fixed-variant font-bold text-headline-md"
+                    >$1.50</span
+                  >
+                  <div class="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      value="1"
+                      class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                    /><button
+                      class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform"
+                    >
+                      <span class="material-symbols-outlined">add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Dip 4 -->
+            <div
+              class="snap-start flex-none w-64 group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative flex flex-col h-[420px]"
+            >
+              <div
+                class="relative w-full h-40 mb-4 rounded-[1.5rem] overflow-hidden"
+              >
+                <img
+                  class="w-full h-full object-cover"
+                  alt="Nutella Crunch dip"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfDFDwSl9xQ83_Mp1KDgQYghlFVNIIqcpGpnq_Q_SPou129Txdx9-BJkOEnZ1xN2ceoPFdefoB1UOjAWbhfgTl1xaOS4oFqLv-fSVmISiGK4ANZWmD5HBneA2fOzN93J6sfQWUmZlkUn63qaCqLSi0pc55eMoZBY_v6503vP8mPv6EKr3GjDO_7-J4Ce7e6YvXQcNsTNf9nCKC2igdtWQ_ZzXCytDl3A4nAPd1YMDxXuldYwp_alxXqKUAWrlrJpVrVp-e6w1csWoC"
+                />
+              </div>
+              <div class="px-3 pb-4 flex flex-col flex-1">
+                <h4
+                  class="font-headline-md text-headline-md text-on-background mb-1"
+                >
+                  Nutella Crunch
+                </h4>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4"
+                >
+                  El clásico sabor de avellanas con trozos crujientes de
+                  galleta.
+                </p>
+                <div class="flex items-center justify-between mt-auto">
+                  <span
+                    class="text-on-primary-fixed-variant font-bold text-headline-md"
+                    >$1.80</span
+                  >
+                  <div class="flex items-center gap-2">
+                    <input
+                      type="number"
+                      min="1"
+                      value="1"
+                      class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none"
+                    /><button
+                      class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform"
+                    >
+                      <span class="material-symbols-outlined">add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 6. Trust Bar -->
+      <section
+        class="py-stack-md px-margin-mobile md:px-margin-desktop border-y border-outline-variant/20"
+      >
+        <div
+          class="max-w-container-max mx-auto flex flex-col md:flex-row justify-around items-center gap-8 text-center"
+        >
+          <div class="flex flex-col items-center">
+            <div
+              class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-primary mb-3"
+            >
+              <span class="material-symbols-outlined">inventory_2</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface"
+              >Empaque Premium</span
+            >
+          </div>
+          <div class="flex flex-col items-center">
+            <div
+              class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-primary mb-3"
+            >
+              <span class="material-symbols-outlined">local_shipping</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface"
+              >Delivery Seguro</span
+            >
+          </div>
+          <div class="flex flex-col items-center">
+            <div
+              class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-primary mb-3"
+            >
+              <span class="material-symbols-outlined">oven_gen</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface"
+              >Horneadas Hoy</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer Component -->
+    <footer
+      class="bg-on-primary-container text-secondary-fixed w-full rounded-t-xl mt-stack-lg"
+    >
+      <div
+        class="flex flex-col md:flex-row justify-between items-start px-margin-mobile md:px-margin-desktop py-stack-lg gap-gutter max-w-container-max mx-auto"
+      >
+        <div class="space-y-4">
+          <div class="font-headline-md text-headline-md text-surface-bright">
+            Merakiies
+          </div>
+          <p class="max-w-xs font-body-md text-body-md text-surface-variant">
+            Artesanía en cada migaja. Horneando felicidad desde nuestro corazón
+            hasta tu mesa.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-stack-md">
+          <div class="flex flex-col gap-2">
+            <span
+              class="font-label-sm text-label-sm uppercase tracking-widest text-outline-variant"
+              >Navegación</span
+            >
+            <a
+              class="font-label-md text-label-md text-surface-variant hover:text-secondary-fixed transition-colors"
+              href="../index.html"
+              >Inicio</a
+            >
+            <a
+              class="font-label-md text-label-md text-secondary-container font-bold"
+              href="#"
+              >Menú</a
+            >
+            <a
+              class="font-label-md text-label-md text-surface-variant hover:text-secondary-fixed transition-colors"
+              href="../index.html"
+              >Nuestra Historia</a
+            >
+            <a
+              class="font-label-md text-label-md text-surface-variant hover:text-secondary-fixed transition-colors"
+              href="#"
+              >Suscripción</a
+            >
+          </div>
+          <div class="flex flex-col gap-2">
+            <span
+              class="font-label-sm text-label-sm uppercase tracking-widest text-outline-variant"
+              >Ayuda</span
+            >
+            <a
+              class="font-label-md text-label-md text-surface-variant hover:text-secondary-fixed transition-colors"
+              href="#"
+              >Contacto</a
+            >
+            <a
+              class="font-label-md text-label-md text-surface-variant hover:text-secondary-fixed transition-colors"
+              href="#"
+              >Términos</a
+            >
+            <a
+              class="font-label-md text-label-md text-surface-variant hover:text-secondary-fixed transition-colors"
+              href="#"
+              >Envíos</a
+            >
+          </div>
+          <div class="flex flex-col gap-2 col-span-2 md:col-span-1">
+            <span
+              class="font-label-sm text-label-sm uppercase tracking-widest text-outline-variant"
+              >Síguenos</span
+            >
+            <div class="flex gap-4">
+              <a class="hover:opacity-80 transition-opacity" href="#"
+                ><span class="material-symbols-outlined">brand_awareness</span></a
+              >
+              <a class="hover:opacity-80 transition-opacity" href="#"
+                ><span class="material-symbols-outlined">photo_camera</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-base border-t border-surface-variant/10 text-center md:text-left"
+      >
+        <p class="font-label-sm text-label-sm text-surface-variant opacity-60">
+          © 2026 Merakiies. Hecho con amor.
+        </p>
+      </div>
+    </footer>
+    <script>
+      // Smooth reveal logic and other micro-interactions
+      document.addEventListener("DOMContentLoaded", () => {
+        const filterButtons = document.querySelectorAll(
+          'button[class*="whitespace-nowrap"]',
+        );
+        filterButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            filterButtons.forEach((b) => {
+              b.classList.remove("bg-primary", "text-on-primary", "shadow-md");
+              b.classList.add(
+                "bg-secondary-container",
+                "text-on-secondary-container",
+              );
+            });
+            btn.classList.add("bg-primary", "text-on-primary", "shadow-md");
+            btn.classList.remove(
+              "bg-secondary-container",
+              "text-on-secondary-container",
+            );
+          });
+        });
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("opacity-100", "translate-y-0");
+                entry.target.classList.remove("opacity-0", "translate-y-10");
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document.querySelectorAll(".product-card-shadow").forEach((card) => {
+          card.classList.add(
+            "transition-all",
+            "duration-700",
+            "opacity-0",
+            "translate-y-10",
+          );
+          observer.observe(card);
+        });
+      });
+    </script>
+    <script src="/js/components.js"></script>
+  </body>
+</html>

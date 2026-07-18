@@ -4,10 +4,8 @@ let dbProducts = [];
 let cart = JSON.parse(localStorage.getItem('merakiies_cart')) || []; 
 
 const views = document.querySelectorAll('.view');
-const navButtons = document.querySelectorAll('.nav-btn');
 const catalogGrid = document.getElementById('catalog-grid');
 const searchGrid = document.getElementById('search-grid');
-const cartBadge = document.getElementById('cart-badge');
 const categoryFilter = document.getElementById('category-filter');
 const priceSort = document.getElementById('price-sort');
 const searchInput = document.getElementById('search-input');
@@ -20,19 +18,32 @@ function navigateTo(targetId) {
     const targetView = document.getElementById(targetId);
     if(targetView) targetView.classList.add('active');
     
-    document.querySelectorAll('.nav-links .nav-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if(btn.dataset.target === targetId) btn.classList.add('active');
+    document.querySelectorAll('.nav-links .nav-link, .nav-links .nav-btn').forEach(btn => {
+        btn.classList.remove('active', 'border-b-2', 'border-primary', 'pb-1');
+        btn.classList.add('text-on-surface-variant');
+        btn.classList.remove('text-primary');
+
+        if(btn.dataset.target === targetId) {
+            btn.classList.add('active', 'border-b-2', 'border-primary', 'pb-1');
+            btn.classList.remove('text-on-surface-variant');
+            btn.classList.add('text-primary');
+        }
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-navButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
+document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.nav-btn');
+    if (btn) {
         const target = btn.dataset.target;
-        if(target) navigateTo(target);
-    });
+        // Only prevent default and do SPA routing if we are on index.html and have a target
+        const currentPath = window.location.pathname;
+        if(target && (currentPath === '/' || currentPath.endsWith('index.html'))) {
+            e.preventDefault();
+            window.history.pushState(null, '', `#${target}`);
+            navigateTo(target);
+        }
+    }
 });
 
 async function fetchProducts() {
@@ -230,18 +241,19 @@ function updateCartUI() {
     const emptyMsg = document.getElementById('empty-cart-message');
     const cartContent = document.getElementById('cart-content');
     const itemsContainer = document.getElementById('cart-items-container');
+    const cartBadge = document.getElementById('cart-badge');
     
     if (!cart) cart = [];
     
     const totalItems = cart.reduce((sum, item) => sum + parseInt(item.quantity), 0);
-    cartBadge.textContent = totalItems;
+    if (cartBadge) cartBadge.textContent = totalItems;
 
     if (cart.length === 0) {
-        emptyMsg.classList.remove('hidden');
-        cartContent.classList.add('hidden');
+        emptyMsg.classList.remove('app-hidden');
+        cartContent.classList.add('app-hidden');
     } else {
-        emptyMsg.classList.add('hidden');
-        cartContent.classList.remove('hidden');
+        emptyMsg.classList.add('app-hidden');
+        cartContent.classList.remove('app-hidden');
         
         itemsContainer.innerHTML = cart.map(item => `
             <div class="cart-item">
@@ -279,5 +291,15 @@ document.getElementById('btn-checkout').addEventListener('click', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchProducts();
+    updateCartUI();
+    
+    // Parse URL hash on load (if arriving from menu.html)
+    const hash = window.location.hash.substring(1);
+    if (hash && document.getElementById(hash)) {
+        setTimeout(() => navigateTo(hash), 100);
+    }
+});
+
+document.addEventListener('headerLoaded', () => {
     updateCartUI();
 });
