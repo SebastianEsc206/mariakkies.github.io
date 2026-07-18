@@ -109,9 +109,7 @@ header {
     align-items: center;
 }
 .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-brown-dark);
+    width: 50%;
 }
 .nav-links {
     display: flex;
