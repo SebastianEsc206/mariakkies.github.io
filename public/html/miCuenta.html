@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Cuenta — Merakiies</title>
+    <meta name="description" content="Inicia sesión o regístrate en Merakiies. Gestiona tu perfil, pedidos, dirección y métodos de pago." />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="/js/tailwind-theme.js"></script>
+    <script src="/js/components.js"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        display: inline-block;
+        vertical-align: middle;
+      }
+      /* Sidebar active item */
+      .sidebar-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 14px 20px;
+        border: none;
+        background: transparent;
+        font-size: 15px;
+        font-weight: 500;
+        color: #56423e;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-left: 4px solid transparent;
+        font-family: 'Quicksand', sans-serif;
+      }
+      .sidebar-item:hover {
+        background: #f6f3ec;
+        color: #9f402d;
+      }
+      .sidebar-item.active {
+        background: #9f402d;
+        color: #ffffff;
+        border-left-color: #e2725b;
+        font-weight: 700;
+      }
+      /* Auth tabs */
+      .auth-tab {
+        flex: 1;
+        padding: 14px;
+        border: none;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #f0eee7;
+        color: #56423e;
+        font-family: 'Quicksand', sans-serif;
+      }
+      .auth-tab.active {
+        background: #9f402d;
+        color: #ffffff;
+      }
+      /* Form inputs */
+      .mk-input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e5e2db;
+        border-radius: 8px;
+        font-size: 15px;
+        color: #1c1c18;
+        background: #ffffff;
+        transition: border-color 0.2s ease;
+        font-family: 'Inter', sans-serif;
+        outline: none;
+      }
+      .mk-input:focus {
+        border-color: #9f402d;
+        box-shadow: 0 0 0 3px rgba(159, 64, 45, 0.1);
+      }
+      .mk-input::placeholder {
+        color: #89726d;
+      }
+      .mk-label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #56423e;
+        font-family: 'Quicksand', sans-serif;
+      }
+      .mk-label .required {
+        color: #9f402d;
+      }
+      .mk-select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e5e2db;
+        border-radius: 8px;
+        font-size: 15px;
+        color: #1c1c18;
+        background: #ffffff;
+        transition: border-color 0.2s ease;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        outline: none;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2356423e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 18px;
+      }
+      .mk-select:focus {
+        border-color: #9f402d;
+        box-shadow: 0 0 0 3px rgba(159, 64, 45, 0.1);
+      }
+      .mk-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 32px;
+        background: #9f402d;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: 'Quicksand', sans-serif;
+      }
+      .mk-btn-primary:hover {
+        background: #802918;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(159, 64, 45, 0.3);
+      }
+      .mk-btn-primary:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+      .mk-btn-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: transparent;
+        color: #9f402d;
+        border: 2px solid #9f402d;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: 'Quicksand', sans-serif;
+      }
+      .mk-btn-outline:hover {
+        background: #9f402d;
+        color: #ffffff;
+      }
+      /* Status badges */
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-family: 'Quicksand', sans-serif;
+      }
+      .status-pending { background: #FFF3CD; color: #856404; }
+      .status-confirmed { background: #D4EDDA; color: #155724; }
+      .status-preparing { background: #fed9b8; color: #5a422a; }
+      .status-shipped { background: #CCE5FF; color: #004085; }
+      .status-delivered { background: #D4EDDA; color: #155724; }
+      .status-cancelled { background: #F8D7DA; color: #721C24; }
+      /* Order card */
+      .order-card {
+        background: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(74, 59, 50, 0.06);
+        transition: box-shadow 0.2s ease;
+      }
+      .order-card:hover {
+        box-shadow: 0 4px 20px rgba(74, 59, 50, 0.1);
+      }
+      .order-header {
+        background: #fed9b8;
+        padding: 16px 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 8px;
+      }
+      /* Toast notification */
+      .mk-toast {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        z-index: 9999;
+        padding: 14px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: 'Quicksand', sans-serif;
+        transform: translateX(120%);
+        transition: transform 0.3s ease;
+        max-width: 400px;
+      }
+      .mk-toast.show { transform: translateX(0); }
+      .mk-toast.success { background: #D4EDDA; color: #155724; border-left: 4px solid #155724; }
+      .mk-toast.error { background: #F8D7DA; color: #721C24; border-left: 4px solid #721C24; }
+      /* Message card */
+      .msg-card {
+        padding: 16px 20px;
+        background: #ffffff;
+        border-radius: 8px;
+        border-left: 4px solid #e5e2db;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      }
+      .msg-card.unread {
+        border-left-color: #9f402d;
+        background: #fdfbf7;
+      }
+      /* Page sections */
+      .account-section { display: none; }
+      .account-section.active { display: block; animation: fadeInSection 0.3s ease; }
+      @keyframes fadeInSection {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      /* Password strength indicator */
+      .strength-bar {
+        height: 4px;
+        border-radius: 2px;
+        background: #e5e2db;
+        margin-top: 6px;
+        overflow: hidden;
+      }
+      .strength-bar-fill {
+        height: 100%;
+        border-radius: 2px;
+        transition: width 0.3s ease, background-color 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="bg-surface-bright text-on-surface min-h-screen flex flex-col">
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Page Header Banner -->
+    <section class="pt-28 pb-12 text-center bg-surface-container-low">
+      <h1 class="font-headline-xl text-headline-xl text-on-background">Mi Cuenta</h1>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+        <a href="/index.html" class="hover:text-primary transition-colors no-underline">Inicio</a>
+        <span class="mx-2">/</span>
+        <span class="text-primary">Mi Cuenta</span>
+      </p>
+    </section>
+
+    <!-- ============================== -->
+    <!--  AUTH SECTION (Not Logged In)  -->
+    <!-- ============================== -->
+    <section id="auth-section" class="flex-1 max-w-[520px] mx-auto w-full px-4 py-12" style="display:none;">
+      <!-- Auth Tabs -->
+      <div class="flex rounded-xl overflow-hidden shadow-sm mb-8">
+        <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Iniciar Sesión</button>
+        <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Registrarse</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="form-login" class="bg-white rounded-2xl p-8 shadow-sm">
+        <div class="text-center mb-8">
+          <span class="material-symbols-outlined text-primary text-[48px]">lock_open</span>
+          <h2 class="font-headline-md text-headline-md text-on-background mt-3">Bienvenido de vuelta</h2>
+          <p class="font-body-md text-on-surface-variant mt-1">Ingresa tus credenciales para continuar</p>
+        </div>
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div class="mb-5">
+            <label class="mk-label" for="login-email">Correo Electrónico <span class="required">*</span></label>
+            <input type="email" id="login-email" class="mk-input" placeholder="tucorreo@ejemplo.com" required />
+          </div>
+          <div class="mb-6">
+            <label class="mk-label" for="login-password">Contraseña <span class="required">*</span></label>
+            <div class="relative">
+              <input type="password" id="login-password" class="mk-input pr-10" placeholder="••••••••" required minlength="4" />
+              <button type="button" onclick="togglePassword('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary transition-colors bg-transparent border-none p-0 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[20px]">visibility_off</span>
+              </button>
+            </div>
+          </div>
+          <div id="login-error" class="text-error text-sm mb-4 font-label-md" style="display:none;"></div>
+          <button type="submit" class="mk-btn-primary w-full" id="login-btn">
+            <span class="material-symbols-outlined text-[20px]">login</span>
+            Iniciar Sesión
+          </button>
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div id="form-register" class="bg-white rounded-2xl p-8 shadow-sm" style="display:none;">
+        <div class="text-center mb-8">
+          <span class="material-symbols-outlined text-primary text-[48px]">person_add</span>
+          <h2 class="font-headline-md text-headline-md text-on-background mt-3">Crear Cuenta</h2>
+          <p class="font-body-md text-on-surface-variant mt-1">Completa todos los campos para registrarte</p>
+        </div>
+        <form id="register-form" onsubmit="handleRegister(event)">
+          <!-- Datos Personales -->
+          <h3 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">badge</span>
+            Datos Personales
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="mk-label" for="reg-first-name">Nombre <span class="required">*</span></label>
+              <input type="text" id="reg-first-name" class="mk-input" placeholder="Tu nombre" required />
+            </div>
+            <div>
+              <label class="mk-label" for="reg-last-name">Apellido <span class="required">*</span></label>
+              <input type="text" id="reg-last-name" class="mk-input" placeholder="Tu apellido" required />
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="mk-label" for="reg-cedula">Cédula <span class="required">*</span></label>
+            <input type="text" id="reg-cedula" class="mk-input" placeholder="V-12345678" required />
+          </div>
+          <div class="mb-4">
+            <label class="mk-label" for="reg-email">Correo Electrónico <span class="required">*</span></label>
+            <input type="email" id="reg-email" class="mk-input" placeholder="tucorreo@ejemplo.com" required />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="mk-label" for="reg-password">Contraseña <span class="required">*</span></label>
+              <input type="password" id="reg-password" class="mk-input" placeholder="Mín. 4 caracteres" required minlength="4" oninput="checkPasswordStrength(this.value)" />
+              <div class="strength-bar"><div id="strength-fill" class="strength-bar-fill" style="width: 0%;"></div></div>
+            </div>
+            <div>
+              <label class="mk-label" for="reg-password-confirm">Confirmar Contraseña <span class="required">*</span></label>
+              <input type="password" id="reg-password-confirm" class="mk-input" placeholder="Repetir contraseña" required minlength="4" />
+            </div>
+          </div>
+
+          <!-- Contacto & Ubicación -->
+          <h3 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4 mt-8 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">location_on</span>
+            Contacto & Ubicación
+          </h3>
+          <div class="mb-4">
+            <label class="mk-label" for="reg-phone">Teléfono <span class="required">*</span></label>
+            <input type="tel" id="reg-phone" class="mk-input" placeholder="+58 412 000 0000" required />
+          </div>
+          <div class="mb-4">
+            <label class="mk-label" for="reg-address">Dirección de Entrega <span class="required">*</span></label>
+            <textarea id="reg-address" class="mk-input" rows="2" placeholder="Calle, edificio, apto, referencia..." required></textarea>
+          </div>
+
+          <!-- Método de Pago -->
+          <h3 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4 mt-8 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">credit_card</span>
+            Método de Pago
+          </h3>
+          <div class="mb-4">
+            <label class="mk-label" for="reg-card-type">Tipo de Tarjeta <span class="required">*</span></label>
+            <select id="reg-card-type" class="mk-select" required>
+              <option value="">Seleccionar...</option>
+              <option value="credit">Tarjeta de Crédito</option>
+              <option value="debit">Tarjeta de Débito</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="mk-label" for="reg-card-number">Número de Tarjeta <span class="required">*</span></label>
+            <input type="text" id="reg-card-number" class="mk-input" placeholder="•••• •••• •••• 1234" required maxlength="19" oninput="formatCardNumber(this)" />
+            <p class="text-xs text-on-surface-variant mt-1">Solo se guardarán los últimos 4 dígitos por seguridad</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="mk-label" for="reg-card-holder">Nombre del Titular <span class="required">*</span></label>
+              <input type="text" id="reg-card-holder" class="mk-input" placeholder="Como aparece en la tarjeta" required />
+            </div>
+            <div>
+              <label class="mk-label" for="reg-card-expiry">Fecha de Vencimiento <span class="required">*</span></label>
+              <input type="text" id="reg-card-expiry" class="mk-input" placeholder="MM/AA" required maxlength="5" oninput="formatExpiry(this)" />
+            </div>
+          </div>
+
+          <div id="register-error" class="text-error text-sm mb-4 font-label-md" style="display:none;"></div>
+          <button type="submit" class="mk-btn-primary w-full mt-6" id="register-btn">
+            <span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+            Crear Cuenta
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================== -->
+    <!--  DASHBOARD (Logged In)        -->
+    <!-- ============================== -->
+    <section id="dashboard-section" class="flex-1 max-w-[1100px] mx-auto w-full px-4 py-12" style="display:none;">
+      <div class="flex flex-col md:flex-row gap-8">
+        <!-- Sidebar -->
+        <aside class="w-full md:w-[260px] bg-white rounded-2xl shadow-sm overflow-hidden flex-shrink-0 self-start">
+          <!-- Customer sidebar items -->
+          <div id="customer-sidebar">
+            <button class="sidebar-item active" data-section="personal-info" onclick="switchSection('personal-info', this)">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">person</span>
+              Información Personal
+            </button>
+            <button class="sidebar-item" data-section="my-orders" onclick="switchSection('my-orders', this)">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">receipt_long</span>
+              Mis Pedidos
+            </button>
+            <button class="sidebar-item" data-section="my-address" onclick="switchSection('my-address', this)">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">location_on</span>
+              Dirección
+            </button>
+            <button class="sidebar-item" data-section="my-payment" onclick="switchSection('my-payment', this)">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">credit_card</span>
+              Método de Pago
+            </button>
+            <button class="sidebar-item" data-section="change-password" onclick="switchSection('change-password', this)">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">key</span>
+              Cambiar Contraseña
+            </button>
+            <div class="border-t border-outline-variant/20"></div>
+            <button class="sidebar-item text-error hover:!text-error" onclick="handleLogout()">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">logout</span>
+              Cerrar Sesión
+            </button>
+          </div>
+
+          <!-- Admin sidebar items -->
+          <div id="admin-sidebar" style="display:none;">
+            <button class="sidebar-item active" data-section="admin-orders" onclick="switchSection('admin-orders', this)">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">list_alt</span>
+              Todos los Pedidos
+            </button>
+            <button class="sidebar-item" data-section="admin-messages" onclick="switchSection('admin-messages', this)">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">mail</span>
+              Mensajes
+            </button>
+            <button class="sidebar-item" data-section="admin-delivery" onclick="switchSection('admin-delivery', this)">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">local_shipping</span>
+              Config. Delivery
+            </button>
+            <div class="border-t border-outline-variant/20"></div>
+            <button class="sidebar-item text-error hover:!text-error" onclick="handleLogout()">
+              <span class="material-symbols-outlined text-[18px] mr-2 align-middle">logout</span>
+              Cerrar Sesión
+            </button>
+          </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="flex-1 min-w-0">
+
+          <!-- ===== PERSONAL INFO ===== -->
+          <div id="section-personal-info" class="account-section active">
+            <div class="bg-white rounded-2xl p-8 shadow-sm">
+              <h2 class="font-headline-md text-headline-md text-on-background mb-6">Información Personal</h2>
+              <form id="profile-form" onsubmit="handleUpdateProfile(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                  <div>
+                    <label class="mk-label">Nombre <span class="required">*</span></label>
+                    <input type="text" id="profile-first-name" class="mk-input" required />
+                  </div>
+                  <div>
+                    <label class="mk-label">Apellido <span class="required">*</span></label>
+                    <input type="text" id="profile-last-name" class="mk-input" required />
+                  </div>
+                </div>
+                <div class="mb-5">
+                  <label class="mk-label">Correo Electrónico</label>
+                  <input type="email" id="profile-email" class="mk-input bg-surface-container-low" disabled />
+                  <p class="text-xs text-on-surface-variant mt-1">El correo no se puede modificar</p>
+                </div>
+                <div class="mb-5">
+                  <label class="mk-label">Teléfono <span class="required">*</span></label>
+                  <input type="tel" id="profile-phone" class="mk-input" required />
+                </div>
+                <div class="mb-6">
+                  <label class="mk-label">Cédula</label>
+                  <input type="text" id="profile-cedula" class="mk-input" />
+                </div>
+                <button type="submit" class="mk-btn-primary">
+                  <span class="material-symbols-outlined text-[18px]">save</span>
+                  Guardar Cambios
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- ===== MY ORDERS ===== -->
+          <div id="section-my-orders" class="account-section">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-headline-md text-headline-md text-on-background">Mis Pedidos</h2>
+              <span id="orders-count" class="text-on-surface-variant font-label-md"></span>
+            </div>
+            <div id="orders-container">
+              <div class="text-center py-12 text-on-surface-variant">
+                <span class="material-symbols-outlined text-[48px] mb-3 block">receipt_long</span>
+                <p class="font-body-md">Cargando pedidos...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== ADDRESS ===== -->
+          <div id="section-my-address" class="account-section">
+            <div class="bg-white rounded-2xl p-8 shadow-sm">
+              <h2 class="font-headline-md text-headline-md text-on-background mb-6">Dirección de Entrega</h2>
+              <form id="address-form" onsubmit="handleUpdateProfile(event)">
+                <div class="mb-6">
+                  <label class="mk-label">Dirección Completa <span class="required">*</span></label>
+                  <textarea id="profile-address" class="mk-input" rows="3" placeholder="Calle, edificio, apto, referencia, ciudad..." required></textarea>
+                </div>
+                <button type="submit" class="mk-btn-primary">
+                  <span class="material-symbols-outlined text-[18px]">save</span>
+                  Guardar Dirección
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- ===== PAYMENT METHOD ===== -->
+          <div id="section-my-payment" class="account-section">
+            <div class="bg-white rounded-2xl p-8 shadow-sm">
+              <h2 class="font-headline-md text-headline-md text-on-background mb-6">Método de Pago</h2>
+              <!-- Current card display -->
+              <div id="current-card-display" class="mb-8 p-5 rounded-xl bg-gradient-to-r from-on-primary-container to-inverse-surface text-surface-bright" style="display:none;">
+                <div class="flex items-center justify-between mb-6">
+                  <span id="card-type-icon" class="font-label-md text-label-md uppercase tracking-widest opacity-80"></span>
+                  <span class="material-symbols-outlined text-[28px]">credit_card</span>
+                </div>
+                <div class="font-headline-md text-headline-md tracking-widest mb-4" id="card-display-number">•••• •••• •••• ----</div>
+                <div class="flex justify-between">
+                  <div>
+                    <span class="text-xs opacity-60 block">TITULAR</span>
+                    <span id="card-display-holder" class="font-label-md">---</span>
+                  </div>
+                  <div>
+                    <span class="text-xs opacity-60 block">VENCE</span>
+                    <span id="card-display-expiry" class="font-label-md">--/--</span>
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">edit</span>
+                Actualizar Tarjeta
+              </h3>
+              <form id="payment-form" onsubmit="handleUpdatePayment(event)">
+                <div class="mb-4">
+                  <label class="mk-label">Tipo de Tarjeta <span class="required">*</span></label>
+                  <select id="pay-card-type" class="mk-select" required>
+                    <option value="">Seleccionar...</option>
+                    <option value="credit">Tarjeta de Crédito</option>
+                    <option value="debit">Tarjeta de Débito</option>
+                  </select>
+                </div>
+                <div class="mb-4">
+                  <label class="mk-label">Número de Tarjeta <span class="required">*</span></label>
+                  <input type="text" id="pay-card-number" class="mk-input" placeholder="•••• •••• •••• 1234" required maxlength="19" oninput="formatCardNumber(this)" />
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  <div>
+                    <label class="mk-label">Nombre del Titular <span class="required">*</span></label>
+                    <input type="text" id="pay-card-holder" class="mk-input" placeholder="Como aparece en la tarjeta" required />
+                  </div>
+                  <div>
+                    <label class="mk-label">Vencimiento <span class="required">*</span></label>
+                    <input type="text" id="pay-card-expiry" class="mk-input" placeholder="MM/AA" required maxlength="5" oninput="formatExpiry(this)" />
+                  </div>
+                </div>
+                <button type="submit" class="mk-btn-primary">
+                  <span class="material-symbols-outlined text-[18px]">save</span>
+                  Actualizar Tarjeta
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- ===== CHANGE PASSWORD ===== -->
+          <div id="section-change-password" class="account-section">
+            <div class="bg-white rounded-2xl p-8 shadow-sm">
+              <h2 class="font-headline-md text-headline-md text-on-background mb-6">Cambiar Contraseña</h2>
+              <form id="password-form" onsubmit="handleChangePassword(event)">
+                <div class="mb-5">
+                  <label class="mk-label">Contraseña Actual <span class="required">*</span></label>
+                  <input type="password" id="pw-current" class="mk-input" placeholder="••••••••" required minlength="4" />
+                </div>
+                <div class="mb-5">
+                  <label class="mk-label">Nueva Contraseña <span class="required">*</span></label>
+                  <input type="password" id="pw-new" class="mk-input" placeholder="Mín. 4 caracteres" required minlength="4" />
+                </div>
+                <div class="mb-6">
+                  <label class="mk-label">Confirmar Nueva Contraseña <span class="required">*</span></label>
+                  <input type="password" id="pw-confirm" class="mk-input" placeholder="Repetir nueva contraseña" required minlength="4" />
+                </div>
+                <button type="submit" class="mk-btn-primary">
+                  <span class="material-symbols-outlined text-[18px]">lock_reset</span>
+                  Cambiar Contraseña
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- ===== ADMIN: ORDERS ===== -->
+          <div id="section-admin-orders" class="account-section">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="font-headline-md text-headline-md text-on-background">Gestión de Pedidos</h2>
+              <span id="admin-orders-count" class="text-on-surface-variant font-label-md"></span>
+            </div>
+            <div id="admin-orders-container">
+              <div class="text-center py-12 text-on-surface-variant">
+                <span class="material-symbols-outlined text-[48px] mb-3 block">list_alt</span>
+                <p class="font-body-md">Cargando pedidos...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== ADMIN: MESSAGES ===== -->
+          <div id="section-admin-messages" class="account-section">
+            <h2 class="font-headline-md text-headline-md text-on-background mb-6">Mensajes de Contacto</h2>
+            <div id="admin-messages-container">
+              <div class="text-center py-12 text-on-surface-variant">
+                <span class="material-symbols-outlined text-[48px] mb-3 block">mail</span>
+                <p class="font-body-md">Cargando mensajes...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== ADMIN: DELIVERY CONFIG ===== -->
+          <div id="section-admin-delivery" class="account-section">
+            <div class="bg-white rounded-2xl p-8 shadow-sm">
+              <h2 class="font-headline-md text-headline-md text-on-background mb-2">Configuración de Delivery</h2>
+              <p class="font-body-md text-on-surface-variant mb-6">Configura el número de WhatsApp del repartidor. Los clientes podrán contactarlo para rastrear sus pedidos.</p>
+              <form id="delivery-form" onsubmit="handleUpdateDelivery(event)">
+                <div class="mb-5">
+                  <label class="mk-label">Número de WhatsApp del Repartidor <span class="required">*</span></label>
+                  <input type="text" id="delivery-whatsapp" class="mk-input" placeholder="+58 412 000 0000" required />
+                </div>
+                <div class="mb-6">
+                  <label class="mk-label">Nombre del Repartidor</label>
+                  <input type="text" id="delivery-name" class="mk-input" placeholder="Nombre del repartidor" />
+                </div>
+                <button type="submit" class="mk-btn-primary">
+                  <span class="material-symbols-outlined text-[18px]">save</span>
+                  Guardar Configuración
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast Container -->
+    <div id="mk-toast" class="mk-toast"></div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="/js/miCuenta.js"></script>
+  </body>
+</html>

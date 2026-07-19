@@ -35,10 +35,70 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         }
         
+        // Actualizar el ícono de perfil según el estado de autenticación
+        updateHeaderProfileState();
+        
+        // Actualizar el badge del carrito
+        updateCartBadge();
+        
         // Dispatch event in case app.js needs to know header is loaded (for SPA logic)
         document.dispatchEvent(new Event('headerLoaded'));
         
       })
       .catch(error => console.error("Error loading header:", error));
   }
+
+  const footerContainer = document.getElementById("footer-container");
+  if (footerContainer) {
+    fetch("/components/footer.html")
+      .then(response => response.text())
+      .then(data => {
+        footerContainer.innerHTML = data;
+      })
+      .catch(error => console.error("Error loading footer:", error));
+  }
 });
+
+/**
+ * Actualiza el botón de perfil en el header según si el usuario está logueado.
+ * Si está logueado, muestra sus iniciales; si no, muestra el ícono genérico.
+ */
+function updateHeaderProfileState() {
+  const profileBtn = document.getElementById('header-profile-btn');
+  if (!profileBtn) return;
+  
+  const token = localStorage.getItem('merakiies_token');
+  const userData = localStorage.getItem('merakiies_user');
+  
+  if (token && userData) {
+    try {
+      const user = JSON.parse(userData);
+      const initials = (user.first_name || '').charAt(0).toUpperCase() + (user.last_name || '').charAt(0).toUpperCase();
+      
+      profileBtn.innerHTML = `
+        <span class="w-8 h-8 bg-primary text-on-primary rounded-full flex items-center justify-center font-label-md text-label-sm font-bold">${initials || 'U'}</span>
+      `;
+    } catch (e) {
+      // Si hay error al parsear, dejar el ícono genérico
+    }
+  }
+}
+
+/**
+ * Actualiza el badge del carrito con el número total de artículos.
+ * Lee directamente de localStorage para funcionar en todas las páginas.
+ */
+function updateCartBadge() {
+  const badge = document.getElementById('cart-badge');
+  if (!badge) return;
+
+  try {
+    const cart = JSON.parse(localStorage.getItem('merakiies_cart')) || [];
+    const totalItems = cart.reduce((sum, item) => sum + (parseInt(item.quantity) || 0), 0);
+    badge.textContent = totalItems;
+    badge.style.display = totalItems > 0 ? 'flex' : 'none';
+  } catch (e) {
+    badge.textContent = '0';
+    badge.style.display = 'none';
+  }
+}

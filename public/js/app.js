@@ -6,7 +6,7 @@ let cart = JSON.parse(localStorage.getItem('merakiies_cart')) || [];
 const views = document.querySelectorAll('.view');
 const catalogGrid = document.getElementById('catalog-grid');
 const searchGrid = document.getElementById('search-grid');
-const categoryFilter = document.getElementById('category-filter');
+let currentCategory = 'all'; // State variable for category buttons
 const priceSort = document.getElementById('price-sort');
 const searchInput = document.getElementById('search-input');
 const btnSearch = document.getElementById('btn-search');
@@ -50,10 +50,52 @@ async function fetchProducts() {
     try {
         const response = await fetch(`${API_URL}/products`);
         dbProducts = await response.json(); 
-        renderProducts(dbProducts, catalogGrid);
-        initCarousel();
+        if (catalogGrid) renderProducts(dbProducts, catalogGrid);
+        if (carouselTrack) initCarousel();
     } catch (error) {
         console.error('Error al obtener productos:', error);
+    }
+}
+
+async function fetchCategories() {
+    try {
+        const response = await fetch(`${API_URL}/categories`);
+        const categories = await response.json();
+        
+        const container = document.getElementById('category-buttons-container');
+        if (container) {
+            // Keep the "Todo el Menú" button, append the rest
+            const allBtn = `
+                <button class="category-btn whitespace-nowrap px-6 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md shadow-md transition-all active:scale-95" data-category="all">
+                    Todo el Menú
+                </button>
+            `;
+            const otherBtns = categories.map(c => `
+                <button class="category-btn whitespace-nowrap px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md hover:bg-secondary-fixed transition-all" data-category="${c.name}">
+                    ${c.name}
+                </button>
+            `).join('');
+            container.innerHTML = allBtn + otherBtns;
+
+            // Re-bind click events for dynamic buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // Reset all styles
+                    document.querySelectorAll('.category-btn').forEach(b => {
+                        b.classList.remove("bg-primary", "text-on-primary", "shadow-md");
+                        b.classList.add("bg-secondary-container", "text-on-secondary-container");
+                    });
+                    // Apply active styles to clicked
+                    btn.classList.add("bg-primary", "text-on-primary", "shadow-md");
+                    btn.classList.remove("bg-secondary-container", "text-on-secondary-container");
+
+                    currentCategory = btn.dataset.category || 'all';
+                    applyFilters();
+                });
+            });
+        }
+    } catch (error) {
+        console.error('Error al obtener categorías:', error);
     }
 }
 
@@ -103,26 +145,37 @@ window.removeFromCart = function(productId) {
     saveCart();
 };
 
-document.getElementById('btn-clear-cart').addEventListener('click', () => {
-    cart = [];
-    saveCart();
-});
+const btnClearCart = document.getElementById('btn-clear-cart');
+if (btnClearCart) {
+    btnClearCart.addEventListener('click', () => {
+        cart = [];
+        saveCart();
+    });
+}
 
 function createProductCard(product) {
+    const badgeHtml = product.badge ? `<div class="absolute top-4 left-4 z-10"><span class="bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-full shadow-sm">${product.badge}</span></div>` : '';
     return `
-        <article class="product-card">
-            <img src="${product.image_url}" alt="${product.name}" class="product-img">
-            <div class="product-info">
-                <span class="product-tag">${product.category_name || product.category}</span>
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-desc">${product.description}</p>
-                <div class="product-price">$${parseFloat(product.price).toFixed(2)}</div>
-                <div class="product-actions">
-                    <input type="number" min="1" value="1" class="qty-input" id="qty-${product.id}">
-                    <button class="btn-primary" onclick="addToCart(${product.id})">Agregar</button>
-                </div>
+        <div class="group bg-surface-bright p-base rounded-cookie product-card-shadow transition-all duration-500 overflow-hidden relative opacity-100 translate-y-0 flex flex-col h-[420px]">
+            ${badgeHtml}
+            <div class="relative w-full aspect-square mb-4 rounded-[1.5rem] overflow-hidden hover-reveal">
+              <img class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500" alt="${product.name}" src="${product.image_url}" />
+              <img class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0" alt="${product.name} hover" src="${product.image_url}" />
             </div>
-        </article>
+            <div class="px-3 pb-4 flex flex-col h-full">
+              <h3 class="font-headline-md text-headline-md text-on-background mb-1">${product.name}</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">${product.description}</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-on-primary-fixed-variant font-bold text-headline-md">$${parseFloat(product.price).toFixed(2)}</span>
+                <div class="flex items-center gap-2">
+                  <input type="number" min="1" value="1" id="qty-${product.id}" class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+                  <button onclick="addToCart(${product.id})" class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform">
+                    <span class="material-symbols-outlined">add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+        </div>
     `;
 }
 
@@ -131,25 +184,31 @@ function renderProducts(productsArray, container) {
 }
 
 function applyFilters() {
+    if (!catalogGrid) return;
+    
     let filtered = [...dbProducts];
-    const category = categoryFilter.value;
-    const sort = priceSort.value;
+    const category = currentCategory;
+    const sort = priceSort ? priceSort.value : 'Más vendidos';
 
     if (category !== 'all') {
         filtered = filtered.filter(p => (p.category_name || p.category) === category);
     }
 
-    if (sort === 'asc') {
+    if (sort === 'Precio: Menor a Mayor' || sort === 'asc') {
         filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-    } else if (sort === 'desc') {
+    } else if (sort === 'Precio: Mayor a Menor' || sort === 'desc') {
         filtered.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+    } else if (sort === 'Más vendidos') {
+        filtered.sort((a, b) => (b.sales_count || 0) - (a.sales_count || 0));
+    } else if (sort === 'Nuevos ingresos') {
+        filtered.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     }
 
     renderProducts(filtered, catalogGrid);
 }
 
-categoryFilter.addEventListener('change', applyFilters);
-priceSort.addEventListener('change', applyFilters);
+// Category logic is now handled in fetchCategories()
+if (priceSort) priceSort.addEventListener('change', applyFilters);
 
 // Carrusel
 let currentIndex = 0;
@@ -187,20 +246,26 @@ function startAutoPlay() {
     }, 3000); 
 }
 
-document.getElementById('carousel-next').addEventListener('click', () => {
-    const items = document.querySelectorAll('.carousel-item');
-    if (currentIndex < items.length - 1) {
-        currentIndex++;
-        updateCarouselPosition();
-    }
-});
+const nextBtn = document.getElementById('carousel-next');
+if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+        const items = document.querySelectorAll('.carousel-item');
+        if (currentIndex < items.length - 1) {
+            currentIndex++;
+            updateCarouselPosition();
+        }
+    });
+}
 
-document.getElementById('carousel-prev').addEventListener('click', () => {
-    if (currentIndex > 0) {
-        currentIndex--;
-        updateCarouselPosition();
-    }
-});
+const prevBtn = document.getElementById('carousel-prev');
+if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarouselPosition();
+        }
+    });
+}
 
 function updateCarouselPosition() {
     const item = document.querySelector('.carousel-item');
@@ -212,9 +277,10 @@ function updateCarouselPosition() {
 
 // Búsqueda
 function executeSearch() {
+    if (!searchInput || !searchGrid) return;
     const query = searchInput.value.toLowerCase().trim();
     if (query === '') {
-        searchStatusText.textContent = "Ingresa un término para comenzar la búsqueda.";
+        if(searchStatusText) searchStatusText.textContent = "";
         searchGrid.innerHTML = "";
         return;
     }
@@ -225,71 +291,205 @@ function executeSearch() {
     );
 
     if (results.length > 0) {
-        searchStatusText.textContent = `Resultados para: "${query}" (${results.length})`;
+        if(searchStatusText) searchStatusText.textContent = `Resultados para: "${query}" (${results.length})`;
         renderProducts(results, searchGrid);
     } else {
-        searchStatusText.textContent = `No se encontraron resultados para "${query}".`;
+        if(searchStatusText) searchStatusText.textContent = `No se encontraron resultados para "${query}".`;
         searchGrid.innerHTML = "";
     }
 }
 
-btnSearch.addEventListener('click', executeSearch);
-searchInput.addEventListener('input', executeSearch);
+if(btnSearch) btnSearch.addEventListener('click', executeSearch);
+if(searchInput) searchInput.addEventListener('input', executeSearch);
 
-// Interfaz del carrito
+// Update general UI and side cart
 function updateCartUI() {
     const emptyMsg = document.getElementById('empty-cart-message');
     const cartContent = document.getElementById('cart-content');
     const itemsContainer = document.getElementById('cart-items-container');
     const cartBadge = document.getElementById('cart-badge');
     
-    if (!cart) cart = [];
-    
-    const totalItems = cart.reduce((sum, item) => sum + parseInt(item.quantity), 0);
-    if (cartBadge) cartBadge.textContent = totalItems;
+    // Fix for all pages
+    if (typeof updateCartBadge === 'function') {
+        updateCartBadge();
+    } else if (cartBadge) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartBadge.textContent = totalItems;
+    }
+
+    // Optional Side Cart (only if it exists on the page)
+    if (itemsContainer) {
+        if (cart.length === 0) {
+            if (emptyMsg) emptyMsg.classList.remove('app-hidden');
+            if (cartContent) cartContent.classList.add('app-hidden');
+        } else {
+            if (emptyMsg) emptyMsg.classList.add('app-hidden');
+            if (cartContent) cartContent.classList.remove('app-hidden');
+            
+            itemsContainer.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-4 py-2 border-b border-outline-variant/20">
+                    <img src="${item.image_url}" class="w-12 h-12 object-cover rounded-md" alt="${item.name}">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-on-surface text-sm">${item.name}</h4>
+                        <div class="text-on-surface-variant text-sm">$${item.price.toFixed(2)} x ${item.quantity}</div>
+                    </div>
+                    <button class="text-error hover:text-error/80" onclick="removeFromCart(${item.product_id})">
+                        <span class="material-symbols-outlined text-[20px]">delete</span>
+                    </button>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const summaryTotal = document.getElementById('summary-total');
+            if (summaryTotal) summaryTotal.textContent = `$${total.toFixed(2)}`;
+        }
+    }
+
+    // Render for the dedicated Cart Page
+    renderCartPage();
+}
+
+function renderCartPage() {
+    const pageItems = document.getElementById('cart-page-items');
+    const pageSubtotal = document.getElementById('cart-page-subtotal');
+    const pageTotal = document.getElementById('cart-page-total');
+
+    if (!pageItems) return; // Not on carrito.html
 
     if (cart.length === 0) {
-        emptyMsg.classList.remove('app-hidden');
-        cartContent.classList.add('app-hidden');
-    } else {
-        emptyMsg.classList.add('app-hidden');
-        cartContent.classList.remove('app-hidden');
-        
-        itemsContainer.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <img src="${item.image_url}" alt="${item.name}" class="cart-item-img">
-                <div class="cart-item-details">
-                    <div class="cart-item-title">${item.name}</div>
-                    <div class="cart-item-price">$${parseFloat(item.price).toFixed(2)} c/u</div>
+        pageItems.innerHTML = `<p class="text-on-surface-variant py-8">Tu carrito está vacío.</p>`;
+        if (pageSubtotal) pageSubtotal.textContent = `$0.00`;
+        if (pageTotal) pageTotal.textContent = `$0.00`;
+        return;
+    }
+
+    pageItems.innerHTML = cart.map(item => {
+        const itemTotal = item.price * item.quantity;
+        return `
+            <div class="flex items-center gap-4 py-6 border-b border-outline-variant/30 relative">
+                <!-- X Button -->
+                <button onclick="removeFromCart(${item.product_id})" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-8 text-outline hover:text-error transition-colors hidden md:block">
+                    <span class="material-symbols-outlined text-[18px]">close</span>
+                </button>
+                
+                <!-- Image -->
+                <img src="${item.image_url}" alt="${item.name}" class="w-20 h-20 object-cover bg-surface-container-low" />
+                
+                <!-- Details -->
+                <div class="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-4 ml-4 md:ml-0">
+                    
+                    <div class="flex-1">
+                        <h4 class="font-headline-sm text-headline-sm text-on-background">${item.name}</h4>
+                        <p class="text-label-sm text-on-surface-variant mt-1">Merakiies Item</p>
+                    </div>
+
+                    <!-- Price Options (Mocked as text for this design) -->
+                    <div class="flex items-center gap-2 text-label-md text-on-background min-w-[120px]">
+                        <span class="material-symbols-outlined text-[16px] text-primary">radio_button_checked</span>
+                        $${item.price.toFixed(2)}
+                    </div>
+
+                    <!-- Quantity Control -->
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center">
+                            <button onclick="updateQuantity(${item.product_id}, ${item.quantity - 1})" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/30 rounded-full">
+                                <span class="material-symbols-outlined text-[14px]">remove</span>
+                            </button>
+                            <span class="w-8 text-center font-bold text-label-md">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.product_id}, ${item.quantity + 1})" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors border border-outline-variant/30 rounded-full">
+                                <span class="material-symbols-outlined text-[14px]">add</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Item Total -->
+                    <div class="font-bold text-headline-sm text-on-background min-w-[80px] text-right">
+                        $${itemTotal.toFixed(2)}
+                    </div>
                 </div>
-                <div class="cart-item-actions">
-                    <input type="number" min="1" value="${item.quantity}" class="qty-input" 
-                           onchange="updateQuantity(${item.product_id}, this.value)">
-                    <div class="item-subtotal"><strong>$${(item.price * item.quantity).toFixed(2)}</strong></div>
-                    <button class="btn-remove" onclick="removeFromCart(${item.product_id})">Eliminar</button>
-                </div>
+
+                <!-- Mobile X Button (top right) -->
+                <button onclick="removeFromCart(${item.product_id})" class="absolute right-0 top-2 text-outline hover:text-error transition-colors md:hidden">
+                    <span class="material-symbols-outlined text-[18px]">close</span>
+                </button>
             </div>
-        `).join('');
+        `;
+    }).join('');
 
+    const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    if (pageSubtotal) pageSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+    if (pageTotal) pageTotal.textContent = `$${subtotal.toFixed(2)}`;
+}
+
+async function processCheckout() {
+    if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+    }
+    
+    const token = localStorage.getItem('merakiies_token');
+    if (!token) {
+        alert("Debes iniciar sesión para procesar tu compra.");
+        window.location.href = '/html/miCuenta.html';
+        return;
+    }
+    
+    try {
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        const tax = subtotal * 0.10;
-        const total = subtotal + tax;
-
-        document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-        document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
-        document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+        const delivery_fee = 0; // Se asume envío gratis o calculable luego
+        const total = subtotal + delivery_fee;
+        
+        const response = await fetch('/api/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                subtotal: subtotal,
+                delivery_fee: delivery_fee,
+                total: total,
+                notes: "Orden creada desde la web",
+                items: cart.map(i => ({
+                    product_id: i.product_id,
+                    quantity: i.quantity,
+                    price: i.price
+                }))
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            alert("¡Tu orden ha sido creada exitosamente! Puedes verla en 'Mi Cuenta'.");
+            cart = [];
+            saveCart();
+            window.location.href = '/html/miCuenta.html';
+        } else {
+            alert("Error al procesar la orden: " + (data.error || "Intenta nuevamente."));
+            if (response.status === 401 || response.status === 403) {
+                localStorage.removeItem('merakiies_token');
+                window.location.href = '/html/miCuenta.html';
+            }
+        }
+    } catch (error) {
+        console.error("Error procesando checkout:", error);
+        alert("Error de conexión. Intenta nuevamente.");
     }
 }
 
-document.getElementById('btn-checkout').addEventListener('click', () => {
-    if (cart.length > 0) {
-        alert("Procesando tu pedido. Tu total es: " + document.getElementById('summary-total').textContent);
-        document.getElementById('btn-clear-cart').click();
-        navigateTo('home');
-    }
-});
+const btnCheckout = document.getElementById('btn-checkout');
+if (btnCheckout) {
+    btnCheckout.addEventListener('click', processCheckout);
+}
+
+const btnCartCheckout = document.getElementById('btn-cart-checkout');
+if (btnCartCheckout) {
+    btnCartCheckout.addEventListener('click', processCheckout);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
+    fetchCategories();
     fetchProducts();
     updateCartUI();
     

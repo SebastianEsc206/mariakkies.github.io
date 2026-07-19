@@ -1,7 +1,9 @@
     <!-- TopNavBar (Shared Component) -->
     <nav class="fixed top-0 w-full z-50 bg-surface-bright backdrop-blur-md shadow-sm transition-colors duration-300">
       <div class="flex justify-between items-center px-6 md:px-16 py-4 max-w-[1280px] mx-auto">
-        <a href="/index.html" class="nav-btn font-headline-md text-headline-md font-bold text-primary bg-transparent p-0 border-none no-underline" data-target="home">Merakiies</a>
+        <a href="/index.html" class="nav-btn bg-transparent p-0 border-none no-underline" data-target="home">
+          <img src="/media/image.png" alt="Merakiies Logo" class="h-12 md:h-14 w-auto object-contain transition-transform hover:scale-105" />
+        </a>
         <div class="hidden md:flex items-center gap-8 nav-links" id="main-nav-links">
           <a href="/index.html" class="nav-btn text-on-surface-variant hover:text-primary transition-colors font-label-md bg-transparent p-0 border-none no-underline" data-target="home">Inicio</a>
           <a href="/html/menu.html" class="nav-btn text-on-surface-variant hover:text-primary transition-colors font-label-md bg-transparent p-0 border-none no-underline">Menú</a>
@@ -9,16 +11,16 @@
           <a href="/html/contacto.html" class="nav-btn text-on-surface-variant hover:text-primary transition-colors font-label-md bg-transparent p-0 border-none no-underline">Contacto</a>
         </div>
         <div class="flex items-center gap-4">
-          <a href="/index.html#cart" class="nav-btn relative p-2 hover:bg-surface-container-high/50 rounded-full transition-all flex items-center justify-center bg-transparent border-none no-underline" data-target="cart">
+          <a href="/html/carrito.html" class="nav-btn relative p-2 hover:bg-surface-container-high/50 rounded-full transition-all flex items-center justify-center bg-transparent border-none no-underline">
             <span class="material-symbols-outlined text-primary">shopping_cart</span>
             <span id="cart-badge" class="badge">0</span>
           </a>
           <button class="md:hidden p-2 bg-transparent border-none">
             <span class="material-symbols-outlined text-primary">menu</span>
           </button>
-          <button class="p-2 hover:bg-surface-container-high/50 rounded-full transition-all flex items-center justify-center bg-transparent border-none">
+          <a href="/html/miCuenta.html" id="header-profile-btn" class="p-2 hover:bg-surface-container-high/50 rounded-full transition-all flex items-center justify-center bg-transparent border-none no-underline">
             <span class="material-symbols-outlined text-primary">person</span>
-          </button>
+          </a>
         </div>
       </div>
     </nav>

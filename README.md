@@ -106,16 +106,40 @@ Estas se instalan automáticamente al ejecutar `npm install`:
 - `express` - Framework web para Node.js
 - `mysql2` - Conector de MySQL para Node.js
 - `cors` - Middleware para permitir peticiones de origen cruzado
+- `bcryptjs` - Hash de contraseñas
+- `jsonwebtoken` - Autenticación con JWT
 
 ---
 
 ## 🗄️ Base de Datos
 
-La base de datos `merakiies_db` contiene las siguientes tablas:
+Al ejecutar `npm start` por primera vez, el servidor:
 
-- **`categories`** - Categorías de galletas (Chocolate, Avena, Veganas, Sin Gluten)
-- **`products`** - Catálogo de galletas con nombre, descripción, precio e imagen
-- **`cart`** - Carrito de compras por sesión de usuario
+1. Se conecta a MySQL en `localhost` (usuario `root`, sin contraseña).
+2. Crea la base de datos `merakiies_db` si no existe.
+3. Si no encuentra la tabla `products`, ejecuta automáticamente `database/merakiies_db.sql`.
+4. Inserta categorías, productos, usuario admin y configuración de delivery.
+
+Tablas creadas automáticamente:
+
+- **`categories`** - Categorías del catálogo
+- **`products`** - Productos con precio, imagen, stock, badge y ventas
+- **`users`** - Usuarios registrados (clientes y admin)
+- **`addresses`** - Direcciones de entrega
+- **`cart_items`** - Carrito por sesión o usuario autenticado
+- **`orders`** / **`order_items`** - Pedidos y su detalle
+- **`payments`** - Registro de pagos
+- **`contact_messages`** - Mensajes del formulario de contacto
+- **`delivery_config`** - WhatsApp y nombre del repartidor
+
+### Cuentas de prueba (instaladas automáticamente)
+
+Estas cuentas se crean al ejecutar `npm start` por primera vez. Las contraseñas se generan con bcrypt en el primer arranque del servidor.
+
+| Rol | Correo | Contraseña |
+|---|---|---|
+| Administrador | `admin@gmail.com` | `admin` |
+| Cliente | `cliente@gmail.com` | `cliente` |
 
 ---
 

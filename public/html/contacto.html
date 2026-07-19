@@ -94,16 +94,18 @@
           <div
             class="bg-surface-container-lowest p-8 md:p-12 rounded-[40px] cookie-shadow"
           >
-            <form class="space-y-stack-sm">
+            <form id="contact-form" class="space-y-stack-sm">
               <div class="space-y-2">
                 <label
                   class="font-label-md text-label-md text-on-surface-variant"
                   >Nombre Completo</label
                 >
                 <input
+                  id="contact-name"
                   class="w-full bg-surface-container border-2 border-transparent focus:border-primary/20 focus:ring-0 rounded-full px-6 py-4 transition-all"
                   placeholder="Escribe tu nombre"
                   type="text"
+                  required
                 />
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -113,9 +115,11 @@
                     >Correo Electrónico</label
                   >
                   <input
+                    id="contact-email"
                     class="w-full bg-surface-container border-2 border-transparent focus:border-primary/20 focus:ring-0 rounded-full px-6 py-4 transition-all"
                     placeholder="tu@email.com"
                     type="email"
+                    required
                   />
                 </div>
                 <div class="space-y-2">
@@ -124,6 +128,7 @@
                     >Teléfono / WhatsApp</label
                   >
                   <input
+                    id="contact-phone"
                     class="w-full bg-surface-container border-2 border-transparent focus:border-primary/20 focus:ring-0 rounded-full px-6 py-4 transition-all"
                     placeholder="+57 300 000 0000"
                     type="tel"
@@ -136,13 +141,16 @@
                   >Tu Mensaje</label
                 >
                 <textarea
+                  id="contact-message"
                   class="w-full bg-surface-container border-2 border-transparent focus:border-primary/20 focus:ring-0 rounded-[24px] px-6 py-4 transition-all resize-none"
                   placeholder="Cuéntanos, ¿en qué bocado de felicidad estás pensando hoy?"
                   rows="4"
+                  required
                 ></textarea>
               </div>
               <button
-                class="w-full bg-primary-container text-white font-label-md text-label-md py-4 rounded-full hover:scale-[1.02] active:scale-95 transition-all shadow-lg hover:shadow-xl mt-4"
+                id="btn-submit-contact"
+                class="w-full bg-primary-container text-white font-label-md text-label-md py-4 rounded-full hover:scale-[1.02] active:scale-95 transition-all shadow-lg hover:shadow-xl mt-4 disabled:opacity-50"
                 type="submit"
               >
                 Enviar Mensaje
@@ -352,49 +360,9 @@
         </div>
       </section>
     </main>
-    <!-- Footer -->
-    <footer
-      class="bg-surface-container dark:bg-surface-container-highest w-full rounded-t-xl mt-stack-lg"
-    >
-      <div
-        class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-stack-md w-full max-w-container-max mx-auto"
-      >
-        <div class="space-y-4 text-center md:text-left mb-8 md:mb-0">
-          <div
-            class="font-headline-md text-headline-md text-on-secondary-container dark:text-secondary-fixed"
-          >
-            Crumbs &amp; Co.
-          </div>
-          <p
-            class="font-body-md text-body-md text-secondary dark:text-secondary-fixed opacity-90"
-          >
-            © 2024 Crumbs &amp; Co. Artisanal Bakery. Handcrafted with Love.
-          </p>
-        </div>
-        <div class="flex flex-wrap justify-center gap-6">
-          <a
-            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
-            href="#"
-            >Privacy Policy</a
-          >
-          <a
-            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
-            href="#"
-            >Terms of Service</a
-          >
-          <a
-            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
-            href="#"
-            >Shipping Info</a
-          >
-          <a
-            class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200"
-            href="#"
-            >Wholesale</a
-          >
-        </div>
-      </div>
-    </footer>
+    <div id="footer-container"></div>
+    <div id="mk-toast" class="mk-toast"></div>
+    <script src="/js/contacto.js"></script>
     <script>
       function toggleAccordion(button) {
         const item = button.parentElement;
