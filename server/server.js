@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { z } = require('zod');
+const xss = require('xss');
 
 const app = express();
 app.use(cors()); 
@@ -307,22 +309,38 @@ app.delete('/api/cart/:session_id', (req, res) => {
 // ENDPOINT DE CONTACTO
 // ============================================
 
+const contactSchema = z.object({
+    full_name: z.string().min(1, "El nombre es obligatorio").max(100),
+    email: z.string().email("Correo electrónico inválido"),
+    phone: z.string().max(20).optional().nullable(),
+    message: z.string().min(1, "El mensaje es obligatorio").max(1000)
+});
+
 app.post('/api/contact', (req, res) => {
-    const { full_name, email, phone, message } = req.body;
-    
-    if (!full_name || !email || !message) {
-        return res.status(400).json({ error: 'Faltan campos obligatorios' });
+    try {
+        const validatedData = contactSchema.parse(req.body);
+        
+        // Sanitización contra XSS
+        const full_name = xss(validatedData.full_name);
+        const email = xss(validatedData.email);
+        const phone = validatedData.phone ? xss(validatedData.phone) : null;
+        const message = xss(validatedData.message);
+        
+        const query = `
+            INSERT INTO contact_messages (full_name, email, phone, message)
+            VALUES (?, ?, ?, ?)
+        `;
+        
+        db.query(query, [full_name, email, phone, message], (err) => {
+            if (err) return res.status(500).json({ error: 'Error al enviar el mensaje' });
+            res.status(200).json({ message: 'Mensaje procesado exitosamente.' });
+        });
+    } catch (error) {
+        if (error instanceof z.ZodError) {
+            return res.status(400).json({ error: error.errors[0].message });
+        }
+        return res.status(500).json({ error: 'Error interno del servidor' });
     }
-    
-    const query = `
-        INSERT INTO contact_messages (full_name, email, phone, message)
-        VALUES (?, ?, ?, ?)
-    `;
-    
-    db.query(query, [full_name, email, phone || null, message], (err) => {
-        if (err) return res.status(500).json({ error: 'Error al enviar el mensaje' });
-        res.status(200).json({ message: 'Mensaje enviado exitosamente. ¡Nos contactaremos pronto!' });
-    });
 });
 
 // ============================================

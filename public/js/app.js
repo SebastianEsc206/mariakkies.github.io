@@ -503,3 +503,54 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('headerLoaded', () => {
     updateCartUI();
 });
+
+// Lógica de Suscripción Newsletter
+const newsletterBtn = document.getElementById('newsletter-btn');
+const newsletterEmail = document.getElementById('newsletter-email');
+
+if (newsletterBtn && newsletterEmail) {
+    newsletterBtn.addEventListener('click', async () => {
+        const email = newsletterEmail.value.trim();
+        
+        // Validación básica de email en frontend
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+            alert('Por favor, ingresa tu correo electrónico.');
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            alert('Por favor, ingresa un correo electrónico válido.');
+            return;
+        }
+        
+        try {
+            newsletterBtn.disabled = true;
+            newsletterBtn.textContent = 'Enviando...';
+            
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    full_name: 'Suscripción Newsletter',
+                    email: email,
+                    message: 'Nuevo usuario suscrito al Club de la Galleta.'
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                alert('¡Gracias por unirte al Club de la Galleta!');
+                newsletterEmail.value = '';
+            } else {
+                alert('Hubo un problema: ' + (data.error || 'Intenta nuevamente.'));
+            }
+        } catch (error) {
+            console.error('Error enviando suscripción:', error);
+            alert('Error de red. Por favor, revisa tu conexión e intenta de nuevo.');
+        } finally {
+            newsletterBtn.disabled = false;
+            newsletterBtn.textContent = 'Quiero Unirme';
+        }
+    });
+}
