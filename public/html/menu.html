@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merakiies - Menú de Felicidad</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="../js/tailwind-theme.js"></script>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Custom classes used by the menu design */
+      .product-card-shadow {
+        box-shadow: 0 4px 24px rgba(74, 59, 50, 0.08);
+      }
+      .product-card-shadow:hover {
+        box-shadow: 0 12px 40px rgba(74, 59, 50, 0.14);
+        transform: translateY(-4px);
+      }
+      .hover-reveal img:first-child {
+        opacity: 1;
+        transition: opacity 0.5s ease;
+      }
+      .hover-reveal img:last-child {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      .hover-reveal:hover img:first-child {
+        opacity: 0;
+      }
+      .hover-reveal:hover img:last-child {
+        opacity: 1;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #ddc0ba;
+        border-radius: 9999px;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-body-md overflow-x-hidden">
+    <!-- TopNavBar will be injected here -->
+    <div id="header-container"></div>
+    <main>
+      <!-- 1. Hero Header -->
+      <section style="padding-top: 6rem"
+        class="bg-secondary-fixed/30 py-stack-lg px-margin-mobile md:px-margin-desktop text-center"
+      >
+        <div class="max-w-4xl mx-auto">
+          <nav
+            class="flex justify-center items-center gap-2 mb-6 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+          >
+            <a href="../index.html" class="hover:text-primary">Inicio</a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <span class="text-primary font-bold">Menú</span>
+          </nav>
+          <h1 class="font-headline-xl text-headline-xl text-on-background mb-4">
+            Nuestro Menú de Felicidad
+          </h1>
+          <p
+            class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto"
+          >
+            Cada galleta es una historia de amor horneada lentamente, con
+            centros derretidos y bordes crujientes que te harán sonreír con cada
+            bocado.
+          </p>
+        </div>
+      </section>
+      <!-- 2 & 3. Toolbar & Filter System -->
+      <section
+        class="sticky top-16 bg-surface-bright/95 backdrop-blur-sm z-40 border-b border-outline-variant/30 py-4 px-margin-mobile md:px-margin-desktop"
+      >
+        <div class="max-w-container-max mx-auto space-y-6">
+          <!-- Toolbar -->
+          <div
+            class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
+            <div class="relative flex-1 max-w-md flex">
+              <!-- <span
+                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline"
+                >search</span
+              > -->
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Busca tu sabor favorito..."
+                class="w-full pl-14 pr-4 py-3 bg-surface-container-low border-2 border-outline-variant/20 rounded-full focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md"
+              /><button
+                id="btn-search"
+                class="ml-2 px-6 py-3 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-sm"
+              >
+                Buscar
+              </button>
+            </div>
+            <div class="flex items-center gap-4">
+              <span class="font-label-md text-label-md text-on-surface-variant"
+                >Ordenar por:</span
+              >
+              <select
+                id="price-sort"
+                class="bg-surface-container-low border-2 border-outline-variant/20 rounded-full px-4 py-2 font-label-md text-label-md focus:ring-2 focus:ring-primary outline-none"
+              >
+                <option>Más vendidos</option>
+                <option>Precio: Menor a Mayor</option>
+                <option>Nuevos ingresos</option>
+              </select>
+            </div>
+          </div>
+          <!-- Filters -->
+          <div
+            id="category-buttons-container"
+            class="flex items-center gap-3 overflow-x-auto custom-scrollbar pb-2 no-scrollbar"
+          >
+            <!-- Dynamic categories will be rendered here by app.js -->
+            <button
+              class="category-btn whitespace-nowrap px-6 py-2 bg-primary text-on-primary rounded-full font-label-md text-label-md shadow-md transition-all active:scale-95"
+              data-category="all"
+            >
+              Todo el Menú
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- 4. Product Grid -->
+      <section
+        class="py-stack-lg px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto"
+      >
+        <div id="search-status-text" class="text-center mb-4 font-label-md text-primary"></div>
+        <div id="search-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-8"></div>
+        <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+          <!-- Dynamic products will be rendered here by app.js -->
+        </div>
+      </section>
+
+      <!-- 6. Trust Bar -->
+      <section
+        class="py-stack-md px-margin-mobile md:px-margin-desktop border-y border-outline-variant/20"
+      >
+        <div
+          class="max-w-container-max mx-auto flex flex-col md:flex-row justify-around items-center gap-8 text-center"
+        >
+          <div class="flex flex-col items-center">
+            <div
+              class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-primary mb-3"
+            >
+              <span class="material-symbols-outlined">inventory_2</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface"
+              >Empaque Premium</span
+            >
+          </div>
+          <div class="flex flex-col items-center">
+            <div
+              class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-primary mb-3"
+            >
+              <span class="material-symbols-outlined">local_shipping</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface"
+              >Delivery Seguro</span
+            >
+          </div>
+          <div class="flex flex-col items-center">
+            <div
+              class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center text-primary mb-3"
+            >
+              <span class="material-symbols-outlined">oven_gen</span>
+            </div>
+            <span class="font-label-md text-label-md text-on-surface"
+              >Horneadas Hoy</span
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+    <script>
+      // Smooth reveal logic and other micro-interactions
+      document.addEventListener("DOMContentLoaded", () => {
+        const filterButtons = document.querySelectorAll(
+          'button[class*="whitespace-nowrap"]',
+        );
+        filterButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            filterButtons.forEach((b) => {
+              b.classList.remove("bg-primary", "text-on-primary", "shadow-md");
+              b.classList.add(
+                "bg-secondary-container",
+                "text-on-secondary-container",
+              );
+            });
+            btn.classList.add("bg-primary", "text-on-primary", "shadow-md");
+            btn.classList.remove(
+              "bg-secondary-container",
+              "text-on-secondary-container",
+            );
+          });
+        });
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("opacity-100", "translate-y-0");
+                entry.target.classList.remove("opacity-0", "translate-y-10");
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+
+        document.querySelectorAll(".product-card-shadow").forEach((card) => {
+          card.classList.add(
+            "transition-all",
+            "duration-700",
+            "opacity-0",
+            "translate-y-10",
+          );
+          observer.observe(card);
+        });
+      });
+    </script>
+    <script src="/js/components.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

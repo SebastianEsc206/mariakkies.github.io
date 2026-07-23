@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Merakiies - Galletas Artesanales</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Quicksand:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-theme.js"></script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="font-body-md text-body-md overflow-x-hidden">
+    <!-- TopNavBar will be injected here -->
+    <div id="header-container"></div>
+
+    <main>
+      <section id="home" class="view active">
+        <!-- 1. Hero Section -->
+        <section class="relative min-h-screen flex items-center pt-20">
+          <div class="absolute inset-0 z-0">
+            <div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDydy6c27ziKdjMLVAq8ajwA2jQjgfr0pTWNM5itM83Ky5mhScFBD0CvlmIhAdw-wF9QKeW0aVjz6NSq54vC2WkmM9x2YxPHe5ALMUGVqDa4O_DtjuNVwMYlshF17A45iqeB0M5_qQC98Zw_xmvkNesBwD5YzJMkvVLNN2iEesFa42xnn5ifaZJBcwebrkaWjRTSegm-6q8pBDMniAoktRSgWzX-oR2uDfGCTf6z-bIQBYwlTPqTBDvShZGsduTTQtsdj_6sG96Tw7F');"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-surface-bright/90 via-surface-bright/40 to-transparent"></div>
+          </div>
+          <div class="relative z-10 max-w-[1280px] mx-auto px-6 md:px-16 w-full">
+            <div class="max-w-2xl space-y-6">
+              <h1 class="font-headline-xl text-headline-xl text-on-surface">Bocados de Felicidad</h1>
+              <p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Repostería artesanal horneada con amor y los mejores ingredientes, directamente desde nuestro horno a tu hogar.</p>
+              <div class="flex flex-wrap gap-4 pt-4">
+                <a href="html/menu.html" class="inline-block bg-primary-container text-on-primary px-8 py-4 rounded-full font-label-md shadow-lg hover:scale-105 transition-transform duration-200 border-none">Ver Menú</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Trust Marquee -->
+        <section class="bg-primary py-6 border-y border-primary-container/20">
+          <div class="max-w-[1280px] mx-auto px-6 md:px-16">
+            <div class="flex flex-wrap justify-center md:justify-between items-center gap-8 md:gap-4">
+              <div class="flex items-center gap-3 text-surface-bright">
+                <span class="material-symbols-outlined text-[24px] opacity-90">package_2</span>
+                <span class="font-label-md uppercase tracking-widest text-[13px]">Empaque Premium</span>
+              </div>
+              <div class="flex items-center gap-3 text-surface-bright">
+                <span class="material-symbols-outlined text-[24px] opacity-90">local_shipping</span>
+                <span class="font-label-md uppercase tracking-widest text-[13px]">Delivery Seguro</span>
+              </div>
+              <div class="flex items-center gap-3 text-surface-bright">
+                <span class="material-symbols-outlined text-[24px] opacity-90">workspace_premium</span>
+                <span class="font-label-md uppercase tracking-widest text-[13px]">Ingredientes de Alta Calidad</span>
+              </div>
+              <div class="flex items-center gap-3 text-surface-bright">
+                <span class="material-symbols-outlined text-[24px] opacity-90">bakery_dining</span>
+                <span class="font-label-md uppercase tracking-widest text-[13px]">Horneado Diario</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Best Sellers -->
+        <section class="py-stack-lg max-w-[1280px] mx-auto px-6 md:px-16">
+          <div class="flex justify-between items-end mb-stack-md">
+            <div class="space-y-2">
+              <span class="text-primary font-label-sm uppercase tracking-widest">Lo más pedido</span>
+              <h2 class="font-headline-lg text-headline-lg">Favoritos del Horno</h2>
+            </div>
+            <a href="html/menu.html" class="inline-block text-primary font-label-md border-b border-primary-container pb-1 hover:opacity-70 transition-opacity bg-transparent p-0 border-none">Ver todo el menú</a>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Product 1 -->
+            <div class="group bg-surface-bright rounded-[2.5rem] p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+              <div class="aspect-square rounded-[2rem] overflow-hidden mb-6">
+                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHoqO4cFSi88veioiifoypUyY1sjCSMwiGUsksTn3aoJoYqfo24YYMOOqsdivKG6H1qP9gFIHGFsKc2ahahPbKqvVcYOj7MlMhpOOfkNObRo9QybOAxyoV-iix5QR_mnodW3ah0RttFbsaloEgiGAsKawMoOwFdwGVQfXwFqKrSv9KEP0UDjYWw1NhUpFZRBy6QHtFVdBr_i8DeDyMAM823r8mNERL406ijpBblJrwkFUthyMBmFd6EuaPUxPcpE-DwKs-MZ33Bk8Q" alt="Choco-Chips">
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-2">Choco-Chips</h3>
+              <p class="text-on-surface-variant font-body-md mb-6 h-12 overflow-hidden">Nuestra receta clásica con trozos masivos de chocolate belga.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-on-primary-fixed-variant font-bold text-headline-md">$3.50</span>
+                <div class="flex items-center gap-2">
+                  <input type="number" min="1" value="1" id="qty-1" class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+                  <button onclick="addToCart(1)" class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform">
+                    <span class="material-symbols-outlined">add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="group bg-surface-bright rounded-[2.5rem] p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+              <div class="aspect-square rounded-[2rem] overflow-hidden mb-6">
+                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdVD5avzqFXzgrLubNaeuXctTpEYR8F3MXA7BJbWU3NcQG3-B1CDRe3XbTDgj5n0_se9yyj7wM934awqihrcq2T55zBeuuU3_-VE48CTb6nQg4qGBn8BAy0bch-f5hsDASQHOkAaL3vUCe6DfInSsVTeD47kX-FjCUFl5YzBEQ4XU5roEB80i4QCxhVbxO0XAUw2sq8SpmW8uuzWk9yPSZfM4ZMZK6l4Zsh50Hw7nZIgshAsnx1WoIOKUano2BUZ37NkBX98RdwjL7" alt="Dandy">
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-2">Dandy</h3>
+              <p class="text-on-surface-variant font-body-md mb-6 h-12 overflow-hidden">Colores y sabor en cada mordisco con lluvia de caramelos.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-on-primary-fixed-variant font-bold text-headline-md">$3.75</span>
+                <div class="flex items-center gap-2">
+                  <input type="number" min="1" value="1" id="qty-2" class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+                  <button onclick="addToCart(2)" class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform">
+                    <span class="material-symbols-outlined">add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="group bg-surface-bright rounded-[2.5rem] p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+              <div class="aspect-square rounded-[2rem] overflow-hidden mb-6">
+                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEcuZAwUiKG9qH9OkPbP0Y_tduRQAGmc7LQh0qnEx0O0rxqCjPDcZApazbFrfx51SMyr3c4UR4hohlHJdApNo7ZY82f-OE3DYj1fpVPazOhy6J6sRK1nogXp1rPFzfV899Rcs0vp0PgNZM59_By6JBPwBWcH7bPIP7TeviST9DwrPMyZ7RAe1NjfOoWCojZ5s0FcUzUpmfhqybaArnMpWTRv8eUwjY2AiMP6Sv55HneAEJgB3MobwRJZ68957HO7GAupuwtOIx6p6M" alt="Festival">
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-2">Festival</h3>
+              <p class="text-on-surface-variant font-body-md mb-6 h-12 overflow-hidden">Una explosión de vainilla y chispas de colores festivos.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-on-primary-fixed-variant font-bold text-headline-md">$3.50</span>
+                <div class="flex items-center gap-2">
+                  <input type="number" min="1" value="1" id="qty-3" class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+                  <button onclick="addToCart(3)" class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform">
+                    <span class="material-symbols-outlined">add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="group bg-surface-bright rounded-[2.5rem] p-6 shadow-sm transition-all duration-300 hover:shadow-md">
+              <div class="aspect-square rounded-[2rem] overflow-hidden mb-6">
+                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvyCKTNDVuUhnUEQdft9NHk5EDzCzTk0Fv5KVT6nEiwGzS5TI1WJfMVmPqo45322fwrxzIPqFAfC3FJPKR4b468HtC995SFmE89cmGayAX9upTTeayNYNBbkqpxOALs49JcdjLz2MjMoLXz1pA5egM6tt-I7VC58Clu5KdMvbU8NwfEaoP5QBuGnYDw6AnAcj7xkcfhRElweN99mv-ZcxqaPAXR7ZWhSh6qceeyNyRDqD2noLMHc9MeCr7kp23R-FqVy1gyM5dRwfE" alt="Triple Chocolate">
+              </div>
+              <h3 class="font-headline-md text-headline-md mb-2">Triple Chocolate</h3>
+              <p class="text-on-surface-variant font-body-md mb-6 h-12 overflow-hidden">Masa de cacao intenso con tres tipos de chocolate fundido.</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-on-primary-fixed-variant font-bold text-headline-md">$4.00</span>
+                <div class="flex items-center gap-2">
+                  <input type="number" min="1" value="1" id="qty-4" class="w-14 h-12 text-center bg-surface-container-low border-2 border-outline-variant/20 rounded-full font-label-md text-on-surface-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+                  <button onclick="addToCart(4)" class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center hover:rotate-90 transition-transform">
+                    <span class="material-symbols-outlined">add</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Promo Banner -->
+        <section class="py-stack-lg px-6">
+          <div class="max-w-[1100px] mx-auto bg-secondary-container rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center gap-12 overflow-hidden relative">
+            <div class="absolute -top-12 -right-12 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+            <div class="flex-1 space-y-6 relative z-10">
+              <span class="bg-primary/10 text-primary font-label-sm px-4 py-1 rounded-full uppercase tracking-widest">Oferta de la Semana</span>
+              <h2 class="font-headline-lg text-headline-lg leading-tight">Caja de 10 Mini Cookies + Dip de Chocolate</h2>
+              <div class="flex items-baseline gap-4">
+                <span class="text-on-surface-variant line-through font-headline-md">$10.00</span>
+                <span class="text-primary font-headline-xl text-[48px]">$5.00</span>
+              </div>
+              <p class="text-on-secondary-fixed-variant font-body-md max-w-md">Perfecta para compartir o para ese antojo especial de la tarde. Válido hasta agotar existencias.</p>
+              <a href="html/menu.html" class="inline-block bg-primary text-on-primary px-8 py-4 rounded-full font-label-md shadow-lg hover:scale-105 transition-transform duration-200 border-none text-center no-underline w-fit">¡Lo quiero ya!</a>
+            </div>
+            <div class="flex-1 w-full max-w-sm md:max-w-none">
+              <div class="aspect-square bg-surface-bright rounded-[2rem] shadow-sm p-4 rotate-3">
+                <img class="w-full h-full object-cover rounded-[1.5rem]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGBhtdXN2IhRZxq_nXgBouxeyMjFjd0VUk7GufENhwnmLWcml844ftU2oeatzmjlJrxEFJmvbhbe_0rrs8iL_j3G6SpQYCN8F02gI7a94y7XNLVUHdE5tFitOGHr0THM7DkuYFNqe5oske3w_nbOxpRdw8Vy6cIHSv4ku2zrV_eOOKavtmhb2KnX1V_kUNFMDRkIodahAynJNlx0yv6DacKsKy84icSGno6_U1SlYDipqavlzzz913iY-ofYZFw5CsKlAbuuxWOkCs" alt="Mini cookies">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Cookie Cakes Interactive (Bento Style) -->
+        <section class="py-stack-lg max-w-[1280px] mx-auto px-6 md:px-16">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-7 bg-surface-container-high rounded-[3rem] overflow-hidden flex flex-col justify-end relative min-h-[500px]">
+              <div class="absolute inset-0">
+                <img class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNOlmFE8V8-ylb0YBAHWqJPWruF0Hgx8Z7lm5M5BYiu6z3ptEqz7prNeU1-af7l86Q-uFwTYvzWi8cJtocdDMxr9e8uQlFZQ3rcRkywcoX26bh6i8kl7Fu97YN8RKSSrvixYVeYEj4Uf1dXVqLq7LPiyge8nDd6F6pkl0fBjqSf9PeqdFSJT1zE5GmLnbFwXCn6wFm5EBlsUfp3_5XmU_1IE7PbXFpiN2IzMKxKa3ZrmIO24PlmAFaNqqCcs1EaK5Q5oVnOASSLI1Z" alt="Cookie Cakes">
+              </div>
+              <div class="relative z-10 p-10 bg-gradient-to-t from-surface-container-high via-surface-container-high/60 to-transparent">
+                <h2 class="font-headline-lg text-headline-lg mb-4 text-black">La Magia de las Cookie Cakes</h2>
+                <p class="font-body-lg max-w-md mb-6 text-black">Crea momentos inolvidables con una torta hecha enteramente de tu galleta favorita.</p>
+                <a href="html/menu.html" class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 rounded-full font-label-md hover:gap-4 transition-all border-none no-underline w-fit">
+                  Ver Menú <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+            <div class="lg:col-span-5 grid grid-rows-2 gap-8">
+              <div class="bg-tertiary-container text-on-tertiary-container rounded-[3rem] p-10 flex flex-col justify-center text-center">
+                <span class="material-symbols-outlined text-[48px] mb-4 text-on-tertiary-fixed">celebration</span>
+                <h3 class="font-headline-md mb-2">Ideal para Eventos</h3>
+                <p class="font-body-md opacity-90">Cumpleaños, aniversarios o simplemente porque sí.</p>
+              </div>
+              <div class="bg-surface-container-low rounded-[3rem] p-10 flex flex-col justify-center items-center text-center">
+                <div class="flex -space-x-4 mb-6">
+                  <div class="w-12 h-12 rounded-full border-4 border-surface-bright overflow-hidden">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW9DFplnrj3bfehAXYCGXAVqRVmp0xpz_iyDTOlJWEidyBrgkpJknoN4thJ2lkfZc_nqGElr5IZ9Mt_G5oXY9abBZOrqfwmZOLzSfcdY-XSTYlVj1LZqdsJd_lMVAFqcA8Xc3md2T_dUXwnWm-OAWMYAm1IDVQHXCWshP2HQxyL6SL8NWi7DRLaLzbD3MXH5lnabh-uyKGeV-DsTmRKO2lXbeP7vF_ipp-I3Y0MZViiSAubITHVtGBN7aUHutCgx7ewHINIJXYAHb0" alt="Customer">
+                  </div>
+                  <div class="w-12 h-12 rounded-full border-4 border-surface-bright overflow-hidden">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcAS3VglYuHca5IqHUNgxzKvZilfox_1ZALQhWyVM7m5GL7BwZvqJMVXyLjndmwxhuaQIupFzWM0ky8fm6byhgxXYG42LQEbKWKepfQ7MGfTiOc8SDVnVeeggXgJ0PaqHEU3OCjKZ4Lrl7JbED_ybYpTedGya8g8n2RpR6uaqwqApXezVaqsgwqo9fcPuwYJ3O9dHWq3ReOAO0EV73iJdc7i9byq_9hWeE7RZ8qLs-fRQ8spBVfT4_S6e2lWSupjeoYfXPyaKK6-te" alt="Customer">
+                  </div>
+                  <div class="w-12 h-12 rounded-full border-4 border-surface-bright bg-primary-container flex items-center justify-center text-on-primary text-[12px] font-bold">+500</div>
+                </div>
+                <p class="font-label-md text-on-surface-variant italic">"La mejor opción para mis fiestas, a todos les encanta."</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Process Section -->
+        <section class="py-stack-lg bg-surface-container-lowest">
+          <div class="max-w-[1280px] mx-auto px-6 md:px-16 text-center space-y-12">
+            <div class="space-y-4">
+              <h2 class="font-headline-lg text-headline-lg">Nuestro Toque Secreto</h2>
+              <p class="text-on-surface-variant max-w-2xl mx-auto font-body-md">No es solo hornear, es el arte de combinar los mejores ingredientes con técnicas tradicionales para un resultado perfecto.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+              <div class="flex flex-col items-center space-y-4">
+                <div class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[40px]">circle</span>
+                </div>
+                <h4 class="font-headline-md">Chocolate Fundido</h4>
+                <p class="text-on-surface-variant font-body-md">Usamos chocolate real, sin sucedáneos, para una textura melosa incomparable.</p>
+              </div>
+              <div class="flex flex-col items-center space-y-4">
+                <div class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[40px]">home_pin</span>
+                </div>
+                <h4 class="font-headline-md">Hecho en Casa</h4>
+                <p class="text-on-surface-variant font-body-md">Cada lote se prepara en nuestra cocina local con cuidado y atención al detalle.</p>
+              </div>
+              <div class="flex flex-col items-center space-y-4">
+                <div class="w-20 h-20 bg-secondary-container rounded-full flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined text-[40px]">flatware</span>
+                </div>
+                <h4 class="font-headline-md">Proceso Artesanal</h4>
+                <p class="text-on-surface-variant font-body-md">Amasado a mano para garantizar esa consistencia perfecta "doughy" que amas.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Social Proof -->
+        <section class="py-stack-lg overflow-hidden bg-surface-bright">
+          <div class="max-w-[1280px] mx-auto px-6 md:px-16 mb-stack-md">
+            <h2 class="font-headline-lg text-headline-lg">Historias de Dulzura</h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1280px] mx-auto px-6 md:px-16 pb-12">
+            <!-- Review Card 1 -->
+            <div class="bg-surface-container-low p-8 rounded-[2.5rem] shadow-sm space-y-4 w-full">
+              <div class="flex text-primary">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+              <p class="text-on-surface-variant font-body-md italic leading-relaxed">"Las galletas más ricas que he probado. El delivery fue súper rápido y llegaron calentitas. ¡La de Triple Chocolate es de otro planeta!"</p>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-outline-variant">
+                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy-6wv6KoKwutQJCsdkzzWx_3ffkkMSfn1WpNJMLHVehfnuQKabBSR6sFRkdegZzMmcDb_OrMzcHKGV1QMoiY6JTVG14yVzvCBG29cQwBPgl3zDsMt5NOYyiu6dcY_yVicnc8ZZw8h27KcYgcE_D4_683AQI7Ua6q-QqeqcWrJcmH_ei3RokjDWT7NG2wER9mad4qIAAEKEk1bZgPNqs6j4zqwBmTttM0u8VE3Ck1QOF85gnhcvl7J1jwY_YrtPRoxbdRiTlqyEAh6" alt="Mariana">
+                </div>
+                <div>
+                  <p class="font-label-md text-on-surface">Mariana G.</p>
+                  <p class="text-on-surface-variant text-[12px]">Cliente Recurrente</p>
+                </div>
+              </div>
+            </div>
+            <!-- Review Card 2 -->
+            <div class="bg-surface-container-low p-8 rounded-[2.5rem] shadow-sm space-y-4 w-full">
+              <div class="flex text-primary">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+              <p class="text-on-surface-variant font-body-md italic leading-relaxed">"Pedí una Cookie Cake para el cumple de mi hijo y fue el éxito total. La decoración impecable y el sabor, ¡uff! Muy recomendados."</p>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-outline-variant">
+                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRJSICzs5jcdi1XT5TZxWPrk00DFNc3fWnhqxv85KYk6mAR7mWb61r5XewKJ5DsyiL5zaNYbiNEz2Z4etDKhB-9yqaBFArUbELOug7cq8oRmf855iq2YyWxOr5OBAdJrJMSkN23oi1Ei1uT_TFTBiM6u7Rj1yHOo_OfVd2tEo3J4kTHj1olybpH9SdBruGfBxsaEo1o9HLu12TQ31o8aRFiVdQQ5s6NfW_3ZASaIRpGYtWcgHfRvHzmKBIQ6D8oQVZEOQIuLKCpj9O" alt="Roberto">
+                </div>
+                <div>
+                  <p class="font-label-md text-on-surface">Roberto V.</p>
+                  <p class="text-on-surface-variant text-[12px]">Fan de las Cookie Cakes</p>
+                </div>
+              </div>
+            </div>
+            <!-- Review Card 3 -->
+            <div class="bg-surface-container-low p-8 rounded-[2.5rem] shadow-sm space-y-4 w-full">
+              <div class="flex text-primary">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+              <p class="text-on-surface-variant font-body-md italic leading-relaxed">"La suscripción es lo mejor que me ha pasado. Recibo mis galletas frescas cada lunes y me alegra la semana entera. ¡El empaque es hermoso!"</p>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-outline-variant">
+                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQk-Nepd2Gvr2V23N0loTyYGdaeHHjuF0FIwmsa6S5tZ5OxGU1RuAJy7Sn78TCpEiA5Pr3INH5d2l2-OuLVYDlQjOG4oWPVo8cl0OFr5qJt4uGf-YhK_E4ttf6JS6CACvqpjYa8TOR5aH3VnKaQSsbykYrG7IwfOMrM5fPOWcGPdr38oCih-n00tlDSAEOzAdq2Rh2UyqveK0Hw1NxOgw3zfUloUpkcnyjr0GpY5EnAUd0pSK28n-ii4X8TY0rB9dToJDy0TSZWVqB" alt="Elena">
+                </div>
+                <div>
+                  <p class="font-label-md text-on-surface">Elena P.</p>
+                  <p class="text-on-surface-variant text-[12px]">Suscriptora Premium</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Subscription Teaser -->
+        <section class="py-stack-lg px-6">
+          <div class="max-w-[1280px] mx-auto bg-primary rounded-[3rem] p-10 md:p-20 text-center text-surface-bright relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+              <div class="grid grid-cols-6 gap-4 rotate-12 -translate-y-20">
+                <span class="material-symbols-outlined text-[120px]">cookie</span>
+                <span class="material-symbols-outlined text-[120px]">cookie</span>
+                <span class="material-symbols-outlined text-[120px]">cookie</span>
+                <span class="material-symbols-outlined text-[120px]">cookie</span>
+                <span class="material-symbols-outlined text-[120px]">cookie</span>
+                <span class="material-symbols-outlined text-[120px]">cookie</span>
+              </div>
+            </div>
+            <div class="relative z-10 max-w-3xl mx-auto space-y-8">
+              <h2 class="font-headline-xl text-headline-xl">El Club de la Galleta</h2>
+              <p class="font-body-lg opacity-90">Únete a nuestra comunidad y recibe correos semanales de descuentos, noticias, nuevas galletas, sabores exclusivos y promociones especiales.</p>
+              <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <input id="newsletter-email" class="w-full sm:w-auto px-8 py-4 rounded-full border-none bg-surface-bright/20 text-surface-bright placeholder:text-surface-bright/60 focus:ring-2 focus:ring-secondary-container outline-none min-w-[300px]" placeholder="Tu correo electrónico" type="email">
+                <button id="newsletter-btn" class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-full font-label-md shadow-lg hover:scale-105 transition-transform duration-200 w-full sm:w-auto border-none">Quiero Unirme</button>
+              </div>
+              <p class="font-label-sm opacity-60">Cancela en cualquier momento. Sin trucos, solo galletas.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Instagram Feed -->
+        <section class="py-stack-lg max-w-[1280px] mx-auto px-6 md:px-16">
+          <div class="flex items-center justify-between mb-stack-md">
+            <h2 class="font-headline-lg text-headline-lg">Síguenos @merakiies</h2>
+            <a class="text-primary font-label-md flex items-center gap-2" href="#">Ver Instagram <span class="material-symbols-outlined">open_in_new</span></a>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="aspect-square rounded-[1.5rem] overflow-hidden group">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMAkcgQNwWtK0WJzD0KTmKfxulp0fiQQNruRzRd9GdzomCrZ5ZAX-1-tIreFjr08ts0wrXIIk00X30rCju8SskQBJiwHGa_afTkZ53kPiIkuHqCW6x3MuAm3xspGFSzpl-6jdXMimPMIV6xoXDfAdaghBJ799iGkjETw1H6rC-TsWPU-eiPRqmNIEzZbVmTnAo2bWAn2koNbiETwi_1ZAfuDfiFWNgSb9qE8w3_MM0ZdcEriR24XTaKbpxm5VBlgi9M7QqO3KraoSQ" alt="Instagram">
+            </div>
+            <div class="aspect-square rounded-[1.5rem] overflow-hidden group">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0fDShXI3WB5E16bdt4V5Mj5u156ZzZe0OJbOyN331Pwid_XcYfIuSVfulupvGDnUiKwu4OAUrBMNq_oXnIfv9RXvNDRSfILcg-4rDfsgayWWECR93TMvmKSLqz9Z7fdR_3PAU7wkzfXFrtlv-Ivy6F9fWOgJ_kh_xvBEfYFkZyxUoUBbbmq-iJMt2bRGywFyYk6SSw3CaJumkanLzsWF9RMXTPyVpGW_I2x9othhlN4Moxw3teU6GVzyCDnopUTLFhfwKYpBhfcow" alt="Instagram">
+            </div>
+            <div class="aspect-square rounded-[1.5rem] overflow-hidden group">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWHchd3Et-bc6NkWpcFgAZglLbdbNSYoKrj-uq18Ecmc_YfyvH75ZGBJGimD14tVcIsmbY0r7YKsELMf7RbQXelQSH_rBkh7IUO4aE44F54d7BHg4gVmiAc1FTS0-3y_RTQ8Wm_2PclvIAL4ZT4hJWUmXC2IHv4WKpSmgvs3hAAM1XZ-FKpyy0kPM8cShizUGusaL-NVfEP7mYU-hJARuqEd2ZvzcD1GFYNq4Pu1NZli_l3dWt4SaxaUy6sUliFdqg2ghR0c3bc7LG" alt="Instagram">
+            </div>
+            <div class="aspect-square rounded-[1.5rem] overflow-hidden group">
+              <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDG34w2e5wVIZ1YXohZJwE3JFt4_3nYSEii9t497Fo9XEHc30D_9dweNoWVF2KDw4EAkCQRJcoVtbUDFGHdQSZ-HwV1ZBiJWV8ZKlv9E3MAI_6p5a59bdgWRhUGQWore793bbIqSfqwCP5EDx08IRGgVk7dPHFNTvX2c3x-a-0IP-MVbByIKEz9EyeDvLzU-KBP39QyQ0eVleJaCp6Dpmnuj2Ia9ms-eXOIKb3-JV-M_HtYI9AZimiuP5WRp0lGHFuedFlYOLmjV3f" alt="Instagram">
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="catalog" class="view" style="padding-top: 100px;">
+        <div class="catalog-header">
+          <h2>Catalogo de galletas</h2>
+          <p>
+            Nuestra seleccion exclusiva. Solo utilizamos mantequilla real,
+            chocolates premium y cero conservantes artificiales.
+          </p>
+        </div>
+
+        <div class="filters-bar">
+          <div class="filter-group">
+            <label for="category-filter">Categoria:</label>
+            <select id="category-filter">
+              <option value="all">Todas</option>
+              <option value="Chocolate">Chocolate</option>
+              <option value="Avena">Avena</option>
+              <option value="Veganas">Veganas</option>
+              <option value="Sin Gluten">Sin Gluten</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label for="price-sort">Ordenar por:</label>
+            <select id="price-sort">
+              <option value="default">Relevancia</option>
+              <option value="asc">Menor a mayor precio</option>
+              <option value="desc">Mayor a menor precio</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="catalog-grid" class="products-grid"></div>
+      </section>
+
+      <section id="cart" class="view" style="padding-top: 100px;">
+        <div class="cart-header">
+          <h2>Tu carrito de compras</h2>
+        </div>
+
+        <div id="empty-cart-message" class="empty-cart">
+          <p>
+            Tu carrito esta actualmente vacio. Visita nuestro catalogo para
+            agregar deliciosas galletas.
+          </p>
+          <button class="nav-btn btn-primary" data-target="catalog">
+            Ir al catalogo
+          </button>
+        </div>
+
+        <div id="cart-content" class="cart-layout hidden">
+          <div class="cart-items" id="cart-items-container"></div>
+
+          <div class="cart-summary">
+            <h3>Resumen de Compra</h3>
+            <div class="summary-line">
+              <span>Subtotal:</span>
+              <span id="summary-subtotal">$0.00</span>
+            </div>
+            <div class="summary-line">
+              <span>Impuestos (10%):</span>
+              <span id="summary-tax">$0.00</span>
+            </div>
+            <div class="summary-total">
+              <span>Total:</span>
+              <span id="summary-total">$0.00</span>
+            </div>
+
+            <div class="cart-actions">
+              <button id="btn-checkout" class="btn-primary w-100">
+                Proceder al pago
+              </button>
+              <button class="nav-btn btn-secondary w-100" data-target="catalog">
+                Seguir comprando
+              </button>
+              <button id="btn-clear-cart" class="btn-text w-100">
+                Vaciar carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="search" class="view" style="padding-top: 100px;">
+        <div class="search-header">
+          <h2>Buscar Galletas</h2>
+          <div class="search-bar">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Buscar galletas por nombre o ingrediente..."
+            />
+            <button id="btn-search" class="btn-primary">Buscar</button>
+          </div>
+        </div>
+
+        <div class="search-results-info">
+          <p id="search-status-text">
+            Ingresa un termino para comenzar la busqueda.
+          </p>
+        </div>
+
+        <div id="search-grid" class="products-grid"></div>
+      </section>
+
+      <section id="nosotros" class="view" style="padding-top: 100px;">
+        <div class="about-header">
+          <h2>Sobre Merakiies</h2>
+          <p>
+            Conoce más sobre nuestra historia, nuestra pasión por la repostería
+            y cómo contactarnos.
+          </p>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Lo que hacemos</h3>
+            <p>
+              En Merakiies, nos dedicamos a hornear momentos de felicidad. Cada
+              una de nuestras galletas es elaborada de forma 100% artesanal,
+              utilizando recetas tradicionales e ingredientes de la más alta
+              calidad.
+            </p>
+            <p>
+              Creemos en el valor de lo auténtico: utilizamos mantequilla real,
+              chocolates premium y cero conservantes artificiales para ofrecerte
+              un sabor real que reconforta el alma en cada bocado.
+            </p>
+          </div>
+          <div class="about-contact">
+            <h3>Contacto</h3>
+            <p>
+              ¿Tienes alguna duda, quieres hacer un pedido especial para un
+              evento o simplemente quieres saludarnos? ¡Estamos aquí para ti!
+            </p>
+            <ul>
+              <li>
+                <strong>📍 Dirección:</strong> Maracaibo, Zulia, Venezuela
+              </li>
+              <li><strong>📞 Teléfono:</strong> +58 414-0000000</li>
+              <li><strong>✉️ Correo:</strong> merakiies@gmail.com</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 10. Footer (Shared Component) -->
+    <div id="footer-container"></div>
+
+    <script src="js/components.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
